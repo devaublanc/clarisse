@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Work
 {
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Dai\PortfolioBundle\Entity\Tag", cascade={"persist"})
+     */
+    private $tags;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist"})     
+     */
+    private $image;
+
     /**
      * @var integer
      *
@@ -152,5 +163,61 @@ class Work
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Dai\PortfolioBundle\Entity\Image $image
+     * @return Work
+     */
+    public function setImage(\Dai\PortfolioBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Dai\PortfolioBundle\Entity\Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add tags
+     *
+     * @param \Dai\PortfolioBundle\Entity\Tag $tags
+     * @return Work
+     */
+    public function addTag(\Dai\PortfolioBundle\Entity\Tag $tags)
+    {
+        $this->tags[] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Remove tags
+     *
+     * @param \Dai\PortfolioBundle\Entity\Tag $tags
+     */
+    public function removeTag(\Dai\PortfolioBundle\Entity\Tag $tags)
+    {
+        $this->tags->removeElement($tags);
+    }
+
+    /**
+     * Get tags
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
