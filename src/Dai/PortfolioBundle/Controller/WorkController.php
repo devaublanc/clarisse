@@ -58,6 +58,7 @@ class WorkController extends Controller
         $form = $this->get('form.factory')->create(new WorkType(), $work);
 
         if ($form->handleRequest($request)->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($work);
             $em->flush();
