@@ -20,8 +20,12 @@
                 <tr>
                     <td>{{ work.id }}</td>
                     <td>{{ work.title }}</td>
-                    <td>{{ work.image.url }}</td>
-                    <td>Tags</td>
+                    <td>{{ work.image ? work.image.url }}</td>
+                    <td>
+                        {% for tag in work.tags %}
+                            {{ tag.name }}
+                        {% endfor %}
+                    </td>
                     <td>{{ work.date|date('d-m-Y') }}</td>
                 </tr>
             {% endfor %}

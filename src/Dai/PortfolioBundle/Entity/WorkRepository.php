@@ -15,7 +15,7 @@ class WorkRepository extends EntityRepository
 {
     public function getWorks($page, $nbPerPage)
     {
-        $query = $this->createQueryBuilder('w')            
+        $query = $this->createQueryBuilder('w')
             ->leftJoin('w.image', 'i')
             ->addSelect('i')
             ->leftJoin('w.tags', 't')
@@ -34,5 +34,15 @@ class WorkRepository extends EntityRepository
         // Enfin, on retourne l'objet Paginator correspondant à la requête construite
         // (n'oubliez pas le use correspondant en début de fichier)
         return new Paginator($query, true);
-    }    
+    }
+
+
+    public function getPublishedQueryBuilder()
+    {
+        return $this
+            ->createQueryBuilder('w')
+            ->where('w.published = :published')
+            ->setParameter('published', true)
+        ;
+    }
 }

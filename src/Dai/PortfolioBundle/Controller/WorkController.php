@@ -3,10 +3,12 @@
 namespace Dai\PortfolioBundle\Controller;
 
 use Dai\PortfolioBundle\Entity\Work;
+use Dai\PortfolioBundle\Form\WorkType;
 use Dai\PortfolioBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+
 
 
 class WorkController extends Controller
@@ -52,36 +54,22 @@ class WorkController extends Controller
     public function addAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getManager();
+        $work = new Work();
+        $form = $this->get('form.factory')->create(new WorkType(), $work);
 
-        // Création de l'entité Image
-        $image = new Image();
-        $image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
-        $image->setAlt('Job de rêve');
+        if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($work);
+            $em->flush();
 
-        // On lie l'image à l'annonce
-        $work->setImage($image);
+            $request->getSession()->getFlashBag()->add('notice', 'Work saved');
 
-        // On récupère l'EntityManager
-        $em = $this->getDoctrine()->getManager();
-
-        // Étape 1 : On « persiste » l'entité
-        $em->persist($work);
-
-        // Étape 1 bis : si on n'avait pas défini le cascade={"persist"},
-        // on devrait persister à la main l'entité $image
-        // $em->persist($image);
-
-        // Étape 2 : On déclenche l'enregistrement
-        $em->flush();
-
-        // Reste de la méthode qu'on avait déjà écrit
-        if ($request->isMethod('POST')) {
-            $request->getSession()->getFlashBag()->add('notice', 'Travail bien enregistrée.');
-            return $this->redirect($this->generateUrl('dai_portfolio_view', array('id' => $work->getId())));
+            return $this->redirect($this->generateUrl('dai_portfolio_home', array('id' => $work->getId())));
         }
 
-        return $this->render('DaiPortfolioBundle:Work:add.html.twig');
+        return $this->render('DaiPortfolioBundle:Work:add.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     public function editAction($id, Request $request)
