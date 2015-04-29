@@ -4,6 +4,7 @@ namespace Dai\PortfolioBundle\Controller;
 
 use Dai\PortfolioBundle\Entity\Work;
 use Dai\PortfolioBundle\Form\WorkType;
+use Dai\PortfolioBundle\Form\WorkEditType;
 use Dai\PortfolioBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,12 +76,56 @@ class WorkController extends Controller
 
     public function editAction($id, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
 
-        return new Response('edit!' . $id);
+        // On récupère l'annonce $id
+        $work = $em->getRepository('DaiPortfolioBundle:Work')->find($id);
+
+        if (null === $work) {
+            throw new NotFoundHttpException("Work d'id ".$id." n'existe pas.");
+        }
+
+        $form = $this->createForm(new WorkEditType(), $work);
+
+        if ($form->handleRequest($request)->isValid()) {
+            // Inutile de persister ici, Doctrine connait déjà notre annonce
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Work updated');
+
+            return $this->redirect($this->generateUrl('dai_portfolio_home', array('id' => $work->getId())));
+        }
+
+        return $this->render('DaiPortfolioBundle:Work:edit.html.twig', array(
+            'form'   => $form->createView(),
+            'work' => $work // Je passe également l'annonce à la vue si jamais elle veut l'afficher
+        ));
     }
 
-    public function deleteAction($id)
+    public function deleteAction($id, Request $request)
     {
-        return $this->render('DaiPortfolioBundle:Work:delete.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $work = $em->getRepository('DaiPortfolioBundle:Work')->find($id);
+
+        if (null === $work) {
+            throw new NotFoundHttpException("Work id ".$id." n'existe pas.");
+        }
+
+        $form = $this->createFormBuilder()->getForm();
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em->remove($work);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('info', "Work has been deleted");
+
+            return $this->redirect($this->generateUrl('dai_portfolio_home'));
+        }
+
+        return $this->render('DaiPortfolioBundle:Work:delete.html.twig', array(
+            'work' => $work,
+            'form'   => $form->createView()
+        ));
     }
 }
