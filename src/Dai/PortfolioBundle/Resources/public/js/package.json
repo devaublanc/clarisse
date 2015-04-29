@@ -1,0 +1,16 @@
+{
+  "name": "Dai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Benjamin",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.4", 
+    "isotope-layout": "^2.1.1",
+    "jquery": "^2.1.3"
+  }
+}

@@ -1,3 +1,9 @@
+# Stof\DoctrineExtensionBundle configuration
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
+
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }

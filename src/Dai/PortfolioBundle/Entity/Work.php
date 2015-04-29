@@ -3,6 +3,7 @@
 namespace Dai\PortfolioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Work
@@ -33,6 +34,12 @@ class Work
     private $id;
 
     /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
@@ -61,6 +68,7 @@ class Work
     public function __construct()
     {
         $this->date = new \Datetime();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -219,5 +227,28 @@ class Work
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Work
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
