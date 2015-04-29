@@ -1,11 +1,13 @@
 {% extends 'DaiPortfolioBundle::layout.html.twig' %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>New work</h1>
-    </div>
 
     <div class="container">
+        
+        <div class="page-header">
+            <h2>Edit work</h2>
+        </div>
+
         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
             {{ form_errors(form) }}
