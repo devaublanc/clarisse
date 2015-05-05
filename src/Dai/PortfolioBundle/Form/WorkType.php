@@ -19,14 +19,22 @@ class WorkType extends AbstractType
             ->add('title', 'text')
             ->add('description', 'textarea')
             ->add('image', new ImageType())
-            ->add('published', 'checkbox', array('required' => false))
-            ->add('tags', 'entity', array(
-                'class'    => 'DaiPortfolioBundle:Tag',
-                'property' => 'name',
-                'multiple' => true,
-                'expanded' => false,
-                'required' => false
+            
+            ->add('category', 'entity', array(
+              'class'    => 'DaiPortfolioBundle:Category',
+              'property' => 'name',
+              'multiple' => false,
+              'required' => false
             ))
+            ->add('published', 'checkbox', array('required' => false))
+
+            // ->add('tags', 'entity', array(
+            //     'class'    => 'DaiPortfolioBundle:Tag',
+            //     'property' => 'name',
+            //     'multiple' => true,
+            //     'expanded' => false,
+            //     'required' => false
+            // ))
         ;
     }
     

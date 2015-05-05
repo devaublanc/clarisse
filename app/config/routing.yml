@@ -1,4 +1,8 @@
-dai_portfolio:
-    resource: "@DaiPortfolioBundle/Resources/config/routing.yml"
-    prefix:   /portfolio
+dai_work:
+    resource: "@DaiPortfolioBundle/Resources/config/work.yml"
+    prefix:   /work
+
+dai_category:
+    resource: "@DaiPortfolioBundle/Resources/config/category.yml"
+    prefix:   /category
 

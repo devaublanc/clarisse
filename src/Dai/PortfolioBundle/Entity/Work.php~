@@ -22,6 +22,12 @@ class Work
     private $tags;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="works")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
+
+    /**
      * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist"})     
      * @Assert\Valid()
      */

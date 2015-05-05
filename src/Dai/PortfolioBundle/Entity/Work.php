@@ -22,8 +22,14 @@ class Work
     private $tags;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="works")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
+
+    /**
      * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist"})     
-     * @Assert\Valid()
+     * @Assert\Valid()     
      */
     private $image;
 
@@ -55,6 +61,7 @@ class Work
      *
      * @ORM\Column(name="title", type="string", length=255)    
      * @Assert\Length(min=10)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -256,5 +263,28 @@ class Work
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Dai\PortfolioBundle\Entity\Category $category
+     * @return Work
+     */
+    public function setCategory(\Dai\PortfolioBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Dai\PortfolioBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

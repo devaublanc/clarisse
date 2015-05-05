@@ -43,14 +43,7 @@ class WorkController extends Controller
             'page' => $page
         ));
 
-    }
-
-    public function viewAction($id)
-    {
-        return $this->render('DaiPortfolioBundle:Work:view.html.twig', array(
-            'id' => $id
-        ));
-    }
+    } 
 
     public function addAction(Request $request)
     {
@@ -66,7 +59,7 @@ class WorkController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Work saved');
 
-            return $this->redirect($this->generateUrl('dai_portfolio_home', array('id' => $work->getId())));
+            return $this->redirect($this->generateUrl('dai_work_index', array('id' => $work->getId())));
         }
 
         return $this->render('DaiPortfolioBundle:Work:add.html.twig', array(
@@ -93,7 +86,7 @@ class WorkController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Work updated');
 
-            return $this->redirect($this->generateUrl('dai_portfolio_home', array('id' => $work->getId())));
+            return $this->redirect($this->generateUrl('dai_work_index', array('id' => $work->getId())));
         }
 
         return $this->render('DaiPortfolioBundle:Work:edit.html.twig', array(
@@ -120,7 +113,7 @@ class WorkController extends Controller
 
             $request->getSession()->getFlashBag()->add('info', "Work has been deleted");
 
-            return $this->redirect($this->generateUrl('dai_portfolio_home'));
+            return $this->redirect($this->generateUrl('dai_work_index'));
         }
 
         return $this->render('DaiPortfolioBundle:Work:delete.html.twig', array(

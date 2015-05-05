@@ -10,7 +10,7 @@
                 <th>#</th>
                 <th>Title</th>                
                 <th>Preview</th>
-                <th>Tags</th>
+                <th>Category</th>
                 <th>Published</th>
                 <th>Date</th>
                 <th>Actions</th>
@@ -30,16 +30,14 @@
                         />
                     </td>
 
-                    <td>
-                        {% for tag in work.tags %}
-                            {{ tag.name }}
-                        {% endfor %}
+                    <td> 
+                        {{ work.category ? work.category.name }}
                     </td>
                     <td>{{ work.published ? '<span class="label label-success">yes</span>' : '<span class="label label-warning">no</span>' }}</td>
                     <td>{{ work.date|date('d-m-Y') }}</td>
                     <td>
-                        <a href="{{ path('dai_portfolio_edit', {'id': work.id}) }}" class="btn btn-xs btn-default">Edit</a>        
-                        <a href="{{ path('dai_portfolio_delete', {'id': work.id}) }}" class="btn btn-xs btn-danger">delete</a>        
+                        <a href="{{ path('dai_work_edit', {'id': work.id}) }}" class="btn btn-xs btn-default">Edit</a>        
+                        <a href="{{ path('dai_work_delete', {'id': work.id}) }}" class="btn btn-xs btn-danger">delete</a>        
                     </td>
                 </tr>
             {% endfor %}
@@ -49,7 +47,7 @@
     <ul class="pagination">        
         {% for p in range(1, nbPages) %}
             <li{% if p == page %} class="active"{% endif %}>
-                <a href="{{ path('dai_portfolio_home', {'page': p}) }}">{{ p }}</a>
+                <a href="{{ path('dai_work_index', {'page': p}) }}">{{ p }}</a>
             </li>
         {% endfor %}
     </ul>

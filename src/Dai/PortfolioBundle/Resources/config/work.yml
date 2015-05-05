@@ -1,26 +1,20 @@
-dai_portfolio_home:
+dai_work_index:
     path:      /{page}
     defaults:  { _controller: DaiPortfolioBundle:Work:index, page: 1 }
     requirements:
         page: \d*
 
-dai_portfolio_view:
-    path:      /work/{id}
-    defaults:  { _controller: DaiPortfolioBundle:Work:view }
-    requirements:
-        id: \d+
-
-dai_portfolio_add:
+dai_work_add:
     path:      /add
     defaults:  { _controller: DaiPortfolioBundle:Work:add }
 
-dai_portfolio_edit:
+dai_work_edit:
     path:      /edit/{id}
     defaults:  { _controller: DaiPortfolioBundle:Work:edit }
     requirements:
         id: \d+
 
-dai_portfolio_delete:
+dai_work_delete:
     path:      /delete/{id}
     defaults:  { _controller: DaiPortfolioBundle:Work:delete }
     requirements:

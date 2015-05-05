@@ -12,11 +12,11 @@ class LoadTag implements FixtureInterface
   {
     // Liste des noms de catégorie à ajouter
     $names = array(
-      'Développement web',
-      'Développement mobile',
-      'Graphisme',
-      'Intégration',
-      'Réseau'
+      'fresh',
+      'Design',
+      'web',
+      'wear',
+      'Darkness'
     );
 
     foreach ($names as $name) {
