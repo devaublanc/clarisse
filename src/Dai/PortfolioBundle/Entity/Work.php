@@ -5,6 +5,7 @@ namespace Dai\PortfolioBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Work
@@ -22,6 +23,7 @@ class Work
 
     /**
      * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist"})     
+     * @Assert\Valid()
      */
     private $image;
 
@@ -44,13 +46,15 @@ class Work
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime()
      */
     private $date;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)    
+     * @Assert\Length(min=10)
      */
     private $title;
 
@@ -58,6 +62,7 @@ class Work
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 

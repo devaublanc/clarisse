@@ -34,12 +34,11 @@
 
 
 
-            <div class="form-group">
-                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-            </div>
-
-
             {{ form_rest(form) }}
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Envoyez le formulaire"/>
+            </div>
 
 
         {{ form_end(form) }}
