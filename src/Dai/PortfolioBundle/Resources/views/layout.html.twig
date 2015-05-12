@@ -45,8 +45,8 @@
             </div>
 
             <div class="text-right">
-                {# Bonjour {{ app.user.username }} #}
-                <a href="{{ path('logout') }}" class="btn btn-sm btn-default">Logout</a>            
+                <p>Bonjour <strong>{{ app.user.username }}</strong> </p>
+                <a href="{{ path('logout') }}" class="btn btn-xs btn-default">Logout</a>            
             </div>
         {% endif %}
 
