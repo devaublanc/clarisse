@@ -18,7 +18,7 @@ class WorkType extends AbstractType
             ->add('date', 'date')
             ->add('title', 'text')
             ->add('description', 'textarea')
-            ->add('image', new ImageType())
+            ->add('image', new ImageType(), array('required' => false))
             
             ->add('category', 'entity', array(
               'class'    => 'DaiPortfolioBundle:Category',

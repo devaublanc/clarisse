@@ -28,7 +28,7 @@ class Work
     protected $category;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist"})     
+     * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist", "remove"})     
      * @Assert\Valid()     
      */
     private $image;

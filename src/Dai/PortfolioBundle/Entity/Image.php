@@ -42,12 +42,6 @@ class Image
     // On ajoute cet attribut pour y stocker le nom du fichier temporairement
     private $tempFilename;
 
-      
-    public function getFile()
-    {
-        return $this->file;
-    }
-
     // On modifie le setter de File, pour prendre en compte l'upload d'un fichier lorsqu'il en existe déjà un autre
     public function setFile(UploadedFile $file)
     {
@@ -55,34 +49,34 @@ class Image
 
         // On vérifie si on avait déjà un fichier pour cette entité
         if (null !== $this->url) {
+          // On sauvegarde l'extension du fichier pour le supprimer plus tard
+          $this->tempFilename = $this->url;
 
-            // On sauvegarde l'extension du fichier pour le supprimer plus tard
-            $this->tempFilename = $this->url;
-
-            // On réinitialise les valeurs des attributs url et alt
-            $this->url = null;
-            $this->alt = null;
+          // On réinitialise les valeurs des attributs url et alt
+          $this->url = null;
+          $this->alt = null;
         }
     }
 
     /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
+      * @ORM\PrePersist()
+      * @ORM\PreUpdate()
+      */
     public function preUpload()
-    {
-        // Si jamais il n'y a pas de fichier (champ facultatif)
-        if (null === $this->file) {
-            return;
-        }
+     {
+       // Si jamais il n'y a pas de fichier (champ facultatif)
+       if (null === $this->file) {
+         return;
+       }
 
-        // Le nom du fichier est son id, on doit juste stocker également son extension
-        // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
-        $this->url = $this->file->guessExtension();
+       // Le nom du fichier est son id, on doit juste stocker également son extension
+       // Pour faire propre, on devrait renommer cet attribut en « extension », plutôt que « url »
+       $this->url = $this->file->guessExtension();
 
-        // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
-        $this->alt = $this->file->getClientOriginalName();
+       // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
+       $this->alt = $this->file->getClientOriginalName();
     }
+
 
     /**
      * @ORM\PostPersist()
@@ -98,7 +92,6 @@ class Image
         // Si on avait un ancien fichier, on le supprime
         if (null !== $this->tempFilename) {
             $oldFile = $this->getUploadRootDir().'/'.$this->id.'.'.$this->tempFilename;
-
             if (file_exists($oldFile)) {
                 unlink($oldFile);
             }
@@ -188,6 +181,11 @@ class Image
         $this->alt = $alt;
 
         return $this;
+    }
+
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**
