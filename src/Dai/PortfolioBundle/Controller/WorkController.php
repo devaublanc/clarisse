@@ -9,8 +9,7 @@ use Dai\PortfolioBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class WorkController extends Controller
 {
@@ -45,6 +44,10 @@ class WorkController extends Controller
 
     } 
 
+
+    /**
+     * @Security("has_role('ROLE_USER')")
+     */
     public function addAction(Request $request)
     {
 

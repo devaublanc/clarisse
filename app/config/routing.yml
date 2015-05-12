@@ -6,3 +6,12 @@ dai_category:
     resource: "@DaiPortfolioBundle/Resources/config/category.yml"
     prefix:   /category
 
+login:
+    pattern:   /login
+    defaults:  { _controller: DaiUserBundle:Security:login }
+
+login_check:
+    pattern:   /login_check
+
+logout:
+    pattern:   /logout
