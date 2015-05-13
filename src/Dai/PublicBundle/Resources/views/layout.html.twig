@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}
+            Dai Gondo
+        {% endblock %}
+
+    </title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/daipublic/js/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/daipublic/css/animate.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/daipublic/css/style.css') }}" type="text/css" media="all" />
+    {% endblock %}
+
+    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            font-family: Futura, 'Nunito', sans-serif;
+        }
+    </style>
+</head>
+<body>
+        
+    {% block content %}
+    {% endblock %}
+    
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/daipublic/js/bundle.js') }}"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ asset('bundles/daipublic/js/viewport.js') }}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {                
+                
+                console.log($('.introduction__picture, .introdcution__paragraph__animate, .introdcution__title__animate'));
+                $('.introduction__picture, .introdcution__paragraph__animate, .introdcution__title__animate').addClass("hid").viewportChecker({
+                    classToAdd: 'vis animated fadeInUp',
+                    offset: 50
+                });
+            });
+        </script>
+    {% endblock %}
+
+</body>
+</html>

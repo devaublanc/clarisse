@@ -1,3 +1,7 @@
+dai_public:
+    resource: "@DaiPublicBundle/Resources/config/public.yml"
+    prefix:   /
+
 dai_work:
     resource: "@DaiPortfolioBundle/Resources/config/work.yml"
     prefix:   /work

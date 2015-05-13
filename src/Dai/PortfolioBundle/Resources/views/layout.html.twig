@@ -5,28 +5,16 @@
         {% block title %}
             Dai Gondo
         {% endblock %}
-
     </title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/daiportfolio/js/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/daiportfolio/css/animate.css') }}" type="text/css" media="all" />
-        <link rel="stylesheet" href="{{ asset('bundles/daiportfolio/css/style.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/daiportfolio/js/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" media="all" />        
     {% endblock %}
-
-    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
-    <style>
-        body {
-            font-family: Futura, 'Nunito', sans-serif;
-        }
-    </style>
 </head>
 <body>
-
-    
 
     <div class="container">
         {% if app.user %}

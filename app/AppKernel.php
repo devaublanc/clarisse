@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Dai\PortfolioBundle\DaiPortfolioBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Dai\UserBundle\DaiUserBundle(),
+            new Dai\PublicBundle\DaiPublicBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

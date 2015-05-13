@@ -10,3 +10,4 @@
 /vendor/
 /web/bundles/
 /src/Dai/PortfolioBundle/Resources/public/js/node_modules
+src/Dai/PublicBundle/Resources/public/js/node_modules
