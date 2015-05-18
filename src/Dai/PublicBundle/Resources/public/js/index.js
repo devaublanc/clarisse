@@ -73,6 +73,7 @@ Item.prototype.getMask = function (data) {
 
     return mask;
 };
+
 Item.prototype.bind = function () {
     var that = this;
 
