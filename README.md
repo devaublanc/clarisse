@@ -1,4 +1,8 @@
 portfolio
 =========
 
-A Symfony project created on April 23, 2015, 4:13 pm.
+composer install
+
+cd web/bundles/daiportfolio/js/ && npm install
+cd web/bundles/daipublic/js/ && npm install
+
