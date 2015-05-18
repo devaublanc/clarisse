@@ -20,7 +20,7 @@ class WorkController extends Controller
             throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
         }
 
-        $nbPerPage = 2;
+        $nbPerPage = 10;
 
         $works = $this->getDoctrine()
             ->getManager()
@@ -42,7 +42,7 @@ class WorkController extends Controller
             'page' => $page
         ));
 
-    } 
+    }
 
 
     /**

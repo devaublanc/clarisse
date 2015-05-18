@@ -3,17 +3,79 @@
 var Isotope = require('isotope-layout');
 global.$ = require('jquery');
 
+// modules
+var ItemClass = require('./modules/ItemClass.js');
+var PageClass = require('./modules/PageClass.js');
+var FeedClass = require('./modules/FeedClass.js');
 
-var currentColor = 0;
+$(window).load(function() {
+    var page = new PageClass();
+    var container = document.querySelector('#isotope'); 
+    var iso = new Isotope(container, {        
+        itemSelector: '.isotope__item',
+        layoutMode: 'masonry',
+    });
 
-var Item = function (item) {
+    $('[data-item]').each(function () {
+        new ItemClass($(this));
+    });
+
+    new FeedClass($('[data-feed]'))
+
+});
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./modules/FeedClass.js":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/FeedClass.js","./modules/ItemClass.js":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/ItemClass.js","./modules/PageClass.js":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/PageClass.js","isotope-layout":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/js/isotope.js","jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/FeedClass.js":[function(require,module,exports){
+var $ = require('jquery');
+
+var FeedClass = function (feed) {
+    this.feed = feed;
+    this.dataFeed = {};
+    this.btnRefresh = $('[data-btn-refresh-feed]');
+
+    if (this.feed instanceof jQuery && this.feed.length > 0) {
+        this.dataFeed = this.feed.data();
+        this.bind();
+    }
+    console.log(this);
+
+};
+
+FeedClass.prototype.bind = function () {
+    var that = this;
+
+    this.btnRefresh.on('click', function () {
+        that.refresh();
+    });
+};
+
+FeedClass.prototype.refresh = function () {
+    console.log('refresh');
+    $.ajax({
+        url: this.dataFeed.url,
+        success: function (datas) {
+            console.log('success', datas);
+        },
+        error: function (e) {
+            console.log('error', e);
+        }
+    })
+};
+
+module.exports = FeedClass;
+},{"jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/ItemClass.js":[function(require,module,exports){
+(function (global){
+var $ = require('jquery');
+var Isotope = require('isotope-layout');
+global.currentColor = 0;
+
+var ItemClass = function (item) {
     this.item = item;
     this.needResize = false;
 
     this.build();
 };
 
-Item.prototype.pickColor = function () {
+ItemClass.prototype.pickColor = function () {
     var colors = [
         '#FCCC7A',
         '#9ECFA9',
@@ -31,7 +93,7 @@ Item.prototype.pickColor = function () {
     return colors[currentColor];
 };
 
-Item.prototype.build = function () {
+ItemClass.prototype.build = function () {
 
     var data = this.item.data();
 
@@ -40,7 +102,7 @@ Item.prototype.build = function () {
     this.bind();
 };
 
-Item.prototype.getMask = function (data) {
+ItemClass.prototype.getMask = function (data) {
 
     var mask;
     this.item.find('.isotope__item__mask').remove();    
@@ -76,7 +138,7 @@ Item.prototype.getMask = function (data) {
     return mask;
 };
 
-Item.prototype.bind = function () {
+ItemClass.prototype.bind = function () {
     var that = this;
 
     this.item.hover(
@@ -95,7 +157,12 @@ Item.prototype.bind = function () {
     });
 };
 
-var Page = function () {
+module.exports = ItemClass;
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"isotope-layout":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/js/isotope.js","jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/PageClass.js":[function(require,module,exports){
+var $ = require('jquery');
+
+var PageClass = function () {
     this.linkProfil = $('[data-link-profil]');
     this.linkPortfolio = $('[data-link-portfolio]');
     this.linkContact = $('[data-link-contact]');
@@ -103,7 +170,7 @@ var Page = function () {
     this.bind();    
 };
 
-Page.prototype.bind = function () {
+PageClass.prototype.bind = function () {
     var that = this;
 
     this.linkPortfolio.on('click', function (e) {
@@ -125,32 +192,18 @@ Page.prototype.bind = function () {
     });
 };
 
-Page.prototype.changeColor = function (color) {
+PageClass.prototype.changeColor = function (color) {
     $('body').removeClass('white brown blue')
     $('body').addClass(color);
 };
 
-Page.prototype.getPage = function (page) {
+PageClass.prototype.getPage = function (page) {
     $('[data-page]').hide();
     $('[data-page-' + page + ']').show();
 };
 
-$(window).load(function() {
-    var page = new Page();
-    var container = document.querySelector('#isotope'); 
-    var iso = new Isotope(container, {        
-        itemSelector: '.isotope__item',
-        layoutMode: 'masonry',
-    });
-
-
-    $('[data-item]').each(function () {
-        new Item($(this));
-    });
-
-});
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"isotope-layout":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/js/isotope.js","jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/js/isotope.js":[function(require,module,exports){
+module.exports = PageClass;
+},{"jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/js/isotope.js":[function(require,module,exports){
 /*!
  * Isotope v2.2.0
  *

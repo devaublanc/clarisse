@@ -25,18 +25,16 @@
     </style>
 </head>
 <body>
-        
+
     {% block content %}
     {% endblock %}
-    
+
     {% block javascripts %}
         <script type="text/javascript" src="{{ asset('bundles/daipublic/js/bundle.js') }}"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ asset('bundles/daipublic/js/viewport.js') }}"></script>
         <script type="text/javascript">
-            $(document).ready(function() {                
-                
-                console.log($('.introduction__picture, .introdcution__paragraph__animate, .introdcution__title__animate'));
+            $(document).ready(function() {
                 $('.introduction__picture, .introdcution__paragraph__animate, .introdcution__title__animate').addClass("hid").viewportChecker({
                     classToAdd: 'vis animated fadeInUp',
                     offset: 50

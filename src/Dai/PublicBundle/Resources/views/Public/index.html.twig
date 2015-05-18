@@ -36,7 +36,12 @@
                         <div class="introduction__description">Portfolio</div>
                     </section>
 
-                    <div id="isotope" class="isotope">
+                    <div 
+                        id="isotope" 
+                        class="isotope" 
+                        data-feed
+                        data-url="{{ path ('dai_public_index') }}"
+                    >
                         {% for work in works %}
                             <article
                                 data-item
@@ -47,7 +52,9 @@
                                 <img src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
                             </article>
                         {% endfor %}
-                    </div>                    
+                    </div> 
+
+                    <button class="btn btn-default btn-lg btn-block" data-btn-refresh-feed style="margin-bottom: 100px; margin-top: 100px">More</button>                   
                 </div>
                 <div data-page data-page-profil class="animated fadeIn">
                     <section class="introduction">
@@ -147,8 +154,6 @@
                             </div>
                         </div>
                     </section>
-
-
                 </div>
                 <div data-page data-page-contact class="animated fadeIn">
                     <section class="introduction">
