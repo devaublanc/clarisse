@@ -1,5 +1,5 @@
 dai_public_index:
-    path:      /
+    path:      /{page}
     defaults:  { _controller: DaiPublicBundle:Public:index, page: 1 }
     requirements:
         page: \d*

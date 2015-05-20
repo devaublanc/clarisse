@@ -1,16 +1,35 @@
 var $ = require('jquery');
+var ItemClass = require('./ItemClass.js');
+var jQBridget = require('jquery-bridget');
+var Isotope = require('isotope-layout');
+
+$.bridget('isotope', Isotope);
 
 var FeedClass = function (feed) {
     this.feed = feed;
     this.dataFeed = {};
     this.btnRefresh = $('[data-btn-refresh-feed]');
+    this.page = 2;
 
-    if (this.feed instanceof jQuery && this.feed.length > 0) {
+    if (this.feed instanceof $ && this.feed.length > 0) {
         this.dataFeed = this.feed.data();
+        this.build();
         this.bind();
-    }
-    console.log(this);
+    }    
+};
 
+FeedClass.prototype.build = function () {
+    var that = this;
+
+    $(window).on({
+        load : function() {
+            that.feed.isotope({
+                itemSelector: '.isotope__item',
+                layoutMode: 'masonry',
+                resizesContainer: true
+            });
+        }
+    });
 };
 
 FeedClass.prototype.bind = function () {
@@ -22,11 +41,25 @@ FeedClass.prototype.bind = function () {
 };
 
 FeedClass.prototype.refresh = function () {
-    console.log('refresh');
+    var that = this;
+
     $.ajax({
         url: this.dataFeed.url,
-        success: function (datas) {
-            console.log('success', datas);
+        data: {
+            page: that.page 
+        },
+        success: function (datas) {            
+            if (!datas || datas === 'ko') {
+                that.btnRefresh.hide()
+            } else {
+                that.page += 1;
+                $.each(datas, function (index, work) {
+                    var item = new ItemClass($(work));
+                    that.feed.isotope('insert', item.getTemplate());
+                    item.fixSizeMask();
+                });
+                that.btnRefresh.show();
+            }
         },
         error: function (e) {
             console.log('error', e);

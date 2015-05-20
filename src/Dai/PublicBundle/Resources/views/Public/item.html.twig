@@ -1,1 +1,8 @@
-<h1>Hello les putes</h1>
+<article
+    data-item
+    data-title="{{ work.title }}"
+    data-category="{{ work.category ? work.category.name }}"
+    data-reference="{{ work.description }}"
+    class="isotope__item col-lg-4 col-md-4 col-sm-6">
+    <img src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
+</article>

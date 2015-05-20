@@ -6,16 +6,19 @@ use Dai\PortfolioBundle\Entity\Work;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class PublicController extends Controller
 {
 
-    public function indexAction($page, Request $request)
+    public function indexAction(Request $request)
     {
 
+        $page = $request->query->get('page');
+
         if ($page < 1) {
-            throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
+            $page = 1;
         }
 
         $nbPerPage = 5;
@@ -29,21 +32,29 @@ class PublicController extends Controller
 
         $nbPages = ceil(count($works)/$nbPerPage);
 
-        if ($page > $nbPages) {
-            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-        }
-
 
         if($request->isXmlHttpRequest()) {
-        
-            $template = $this->render('DaiPublicBundle:Public:item.html.twig')->getContent();
-            $json = json_encode($template);
-            $response = new Response($json, 200);
-            $response->headers->set('Content-Type', 'application/json');
+
+            if ($page > $nbPages) {
+                $response = new Response('ko', 200);
+            } else {
+
+                $results = array();
+                foreach ($works as $work) {
+                    $results[] = $this->render('DaiPublicBundle:Public:item.html.twig', array('work' => $work))->getContent();
+                }
+
+                $response = new Response(json_encode($results), 200);
+                $response->headers->set('Content-Type', 'application/json');
+            }
+
             return $response;
 
-
         } else {
+
+            if ($page > $nbPages) {
+                throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+            }
 
             return $this->render('DaiPublicBundle:Public:index.html.twig', array(
                 'works' => $works,

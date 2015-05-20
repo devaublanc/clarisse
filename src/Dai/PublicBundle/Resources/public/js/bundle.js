@@ -8,36 +8,52 @@ var ItemClass = require('./modules/ItemClass.js');
 var PageClass = require('./modules/PageClass.js');
 var FeedClass = require('./modules/FeedClass.js');
 
+new FeedClass($('[data-feed]'))
+
 $(window).load(function() {
     var page = new PageClass();
-    var container = document.querySelector('#isotope'); 
-    var iso = new Isotope(container, {        
-        itemSelector: '.isotope__item',
-        layoutMode: 'masonry',
-    });
+    
 
     $('[data-item]').each(function () {
         new ItemClass($(this));
     });
 
-    new FeedClass($('[data-feed]'))
 
 });
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./modules/FeedClass.js":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/FeedClass.js","./modules/ItemClass.js":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/ItemClass.js","./modules/PageClass.js":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/PageClass.js","isotope-layout":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/js/isotope.js","jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/FeedClass.js":[function(require,module,exports){
 var $ = require('jquery');
+var ItemClass = require('./ItemClass.js');
+var jQBridget = require('jquery-bridget');
+var Isotope = require('isotope-layout');
+
+$.bridget('isotope', Isotope);
 
 var FeedClass = function (feed) {
     this.feed = feed;
     this.dataFeed = {};
     this.btnRefresh = $('[data-btn-refresh-feed]');
+    this.page = 2;
 
-    if (this.feed instanceof jQuery && this.feed.length > 0) {
+    if (this.feed instanceof $ && this.feed.length > 0) {
         this.dataFeed = this.feed.data();
+        this.build();
         this.bind();
-    }
-    console.log(this);
+    }    
+};
 
+FeedClass.prototype.build = function () {
+    var that = this;
+
+    $(window).on({
+        load : function() {
+            that.feed.isotope({
+                itemSelector: '.isotope__item',
+                layoutMode: 'masonry',
+                resizesContainer: true
+            });
+        }
+    });
 };
 
 FeedClass.prototype.bind = function () {
@@ -49,11 +65,25 @@ FeedClass.prototype.bind = function () {
 };
 
 FeedClass.prototype.refresh = function () {
-    console.log('refresh');
+    var that = this;
+
     $.ajax({
         url: this.dataFeed.url,
-        success: function (datas) {
-            console.log('success', datas);
+        data: {
+            page: that.page 
+        },
+        success: function (datas) {            
+            if (!datas || datas === 'ko') {
+                that.btnRefresh.hide()
+            } else {
+                that.page += 1;
+                $.each(datas, function (index, work) {
+                    var item = new ItemClass($(work));
+                    that.feed.isotope('insert', item.getTemplate());
+                    item.fixSizeMask();
+                });
+                that.btnRefresh.show();
+            }
         },
         error: function (e) {
             console.log('error', e);
@@ -62,7 +92,7 @@ FeedClass.prototype.refresh = function () {
 };
 
 module.exports = FeedClass;
-},{"jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/ItemClass.js":[function(require,module,exports){
+},{"./ItemClass.js":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/ItemClass.js","isotope-layout":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/js/isotope.js","jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js","jquery-bridget":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery-bridget/jquery.bridget.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/modules/ItemClass.js":[function(require,module,exports){
 (function (global){
 var $ = require('jquery');
 var Isotope = require('isotope-layout');
@@ -91,6 +121,10 @@ ItemClass.prototype.pickColor = function () {
     }
 
     return colors[currentColor];
+};
+
+ItemClass.prototype.getTemplate = function () {
+    return this.item;
 };
 
 ItemClass.prototype.build = function () {
@@ -137,6 +171,18 @@ ItemClass.prototype.getMask = function (data) {
 
     return mask;
 };
+
+
+
+ItemClass.prototype.fixSizeMask = function () {
+    this.item.find('[data-mask]').css({
+        'height': this.item.find('img').height(),
+        'width': this.item.find('img').width(),
+        'margin-left': '30px',
+        'margin-top': '30px',
+    });
+};
+
 
 ItemClass.prototype.bind = function () {
     var that = this;
@@ -4276,7 +4322,148 @@ return Outlayer;
 }));
 
 
-},{"./item":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/outlayer/item.js","eventie":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/outlayer/node_modules/eventie/eventie.js","fizzy-ui-utils":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/fizzy-ui-utils/utils.js","get-size":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/get-size/get-size.js","wolfy87-eventemitter":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/outlayer/node_modules/wolfy87-eventemitter/EventEmitter.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js":[function(require,module,exports){
+},{"./item":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/outlayer/item.js","eventie":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/outlayer/node_modules/eventie/eventie.js","fizzy-ui-utils":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/fizzy-ui-utils/utils.js","get-size":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/get-size/get-size.js","wolfy87-eventemitter":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/isotope-layout/node_modules/outlayer/node_modules/wolfy87-eventemitter/EventEmitter.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery-bridget/jquery.bridget.js":[function(require,module,exports){
+/**
+ * Bridget makes jQuery widgets
+ * v1.1.0
+ * MIT license
+ */
+
+( function( window ) {
+
+'use strict';
+
+// -------------------------- utils -------------------------- //
+
+var slice = Array.prototype.slice;
+
+function noop() {}
+
+// -------------------------- definition -------------------------- //
+
+function defineBridget( $ ) {
+
+// bail if no jQuery
+if ( !$ ) {
+  return;
+}
+
+// -------------------------- addOptionMethod -------------------------- //
+
+/**
+ * adds option method -> $().plugin('option', {...})
+ * @param {Function} PluginClass - constructor class
+ */
+function addOptionMethod( PluginClass ) {
+  // don't overwrite original option method
+  if ( PluginClass.prototype.option ) {
+    return;
+  }
+
+  // option setter
+  PluginClass.prototype.option = function( opts ) {
+    // bail out if not an object
+    if ( !$.isPlainObject( opts ) ){
+      return;
+    }
+    this.options = $.extend( true, this.options, opts );
+  };
+}
+
+// -------------------------- plugin bridge -------------------------- //
+
+// helper function for logging errors
+// $.error breaks jQuery chaining
+var logError = typeof console === 'undefined' ? noop :
+  function( message ) {
+    console.error( message );
+  };
+
+/**
+ * jQuery plugin bridge, access methods like $elem.plugin('method')
+ * @param {String} namespace - plugin name
+ * @param {Function} PluginClass - constructor class
+ */
+function bridge( namespace, PluginClass ) {
+  // add to jQuery fn namespace
+  $.fn[ namespace ] = function( options ) {
+    if ( typeof options === 'string' ) {
+      // call plugin method when first argument is a string
+      // get arguments for method
+      var args = slice.call( arguments, 1 );
+
+      for ( var i=0, len = this.length; i < len; i++ ) {
+        var elem = this[i];
+        var instance = $.data( elem, namespace );
+        if ( !instance ) {
+          logError( "cannot call methods on " + namespace + " prior to initialization; " +
+            "attempted to call '" + options + "'" );
+          continue;
+        }
+        if ( !$.isFunction( instance[options] ) || options.charAt(0) === '_' ) {
+          logError( "no such method '" + options + "' for " + namespace + " instance" );
+          continue;
+        }
+
+        // trigger method with arguments
+        var returnValue = instance[ options ].apply( instance, args );
+
+        // break look and return first value if provided
+        if ( returnValue !== undefined ) {
+          return returnValue;
+        }
+      }
+      // return this if no return value
+      return this;
+    } else {
+      return this.each( function() {
+        var instance = $.data( this, namespace );
+        if ( instance ) {
+          // apply options & init
+          instance.option( options );
+          instance._init();
+        } else {
+          // initialize new instance
+          instance = new PluginClass( this, options );
+          $.data( this, namespace, instance );
+        }
+      });
+    }
+  };
+
+}
+
+// -------------------------- bridget -------------------------- //
+
+/**
+ * converts a Prototypical class into a proper jQuery plugin
+ *   the class must have a ._init method
+ * @param {String} namespace - plugin name, used in $().pluginName
+ * @param {Function} PluginClass - constructor class
+ */
+$.bridget = function( namespace, PluginClass ) {
+  addOptionMethod( PluginClass );
+  bridge( namespace, PluginClass );
+};
+
+return $.bridget;
+
+}
+
+// transport
+if ( typeof define === 'function' && define.amd ) {
+  // AMD
+  define( [ 'jquery' ], defineBridget );
+} else if ( typeof exports === 'object' ) {
+  defineBridget( require('jquery') );
+} else {
+  // get jquery from browser global
+  defineBridget( window.jQuery );
+}
+
+})( window );
+
+},{"jquery":"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js"}],"/Users/Benjamin/Sites/DaiSf/src/Dai/PublicBundle/Resources/public/js/node_modules/jquery/dist/jquery.js":[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.4
  * http://jquery.com/

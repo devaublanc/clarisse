@@ -27,6 +27,10 @@ ItemClass.prototype.pickColor = function () {
     return colors[currentColor];
 };
 
+ItemClass.prototype.getTemplate = function () {
+    return this.item;
+};
+
 ItemClass.prototype.build = function () {
 
     var data = this.item.data();
@@ -71,6 +75,18 @@ ItemClass.prototype.getMask = function (data) {
 
     return mask;
 };
+
+
+
+ItemClass.prototype.fixSizeMask = function () {
+    this.item.find('[data-mask]').css({
+        'height': this.item.find('img').height(),
+        'width': this.item.find('img').width(),
+        'margin-left': '30px',
+        'margin-top': '30px',
+    });
+};
+
 
 ItemClass.prototype.bind = function () {
     var that = this;
