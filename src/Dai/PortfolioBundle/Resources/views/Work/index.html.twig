@@ -9,7 +9,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#</th>
+                <th>Position</th>
                 <th>Title</th>                
                 <th>Preview</th>
                 <th>Category</th>
@@ -21,7 +21,7 @@
         <tbody>
             {% for work in works %}
                 <tr>
-                    <td>{{ work.id }}</td>
+                    <td><span class="label label-default">{{ work.position }}</span></td>
                     <td>{{ work.title }}</td>
                     <td>
                         <img

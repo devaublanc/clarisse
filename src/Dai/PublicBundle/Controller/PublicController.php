@@ -21,12 +21,12 @@ class PublicController extends Controller
             $page = 1;
         }
 
-        $nbPerPage = 5;
+        $nbPerPage = 15;
 
         $works = $this->getDoctrine()
             ->getManager()
             ->getRepository('DaiPortfolioBundle:Work')
-            ->getWorks($page, $nbPerPage)
+            ->getWorksPublished($page, $nbPerPage)
         ;
 
 
@@ -54,12 +54,13 @@ class PublicController extends Controller
 
             if ($page > $nbPages) {
                 throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-            }
+            }            
 
             return $this->render('DaiPublicBundle:Public:index.html.twig', array(
                 'works' => $works,
                 'nbPages' => $nbPages,
-                'page' => $page
+                'page' => $page,
+                'needPager' => $works->count() > $nbPerPage,
             ));
 
         }

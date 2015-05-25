@@ -60,7 +60,7 @@ class Work
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)    
-     * @Assert\Length(min=10)
+     * @Assert\Length(max=50)
      * @Assert\NotBlank()
      */
     private $title;
@@ -69,9 +69,19 @@ class Work
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\Length(max=200)
      * @Assert\NotBlank()
      */
     private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="integer")
+     * @Assert\Type(type="integer", message="The value {{ value }} is not a number")
+     * @Assert\NotBlank()
+     */
+    private $position;
 
     /**
      * @ORM\Column(name="published", type="boolean")
@@ -286,5 +296,28 @@ class Work
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Work
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

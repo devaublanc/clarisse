@@ -20,7 +20,7 @@ class WorkRepository extends EntityRepository
             ->addSelect('i')
             ->leftJoin('w.tags', 't')
             ->addSelect('t')
-            ->orderBy('w.date', 'DESC')
+            ->orderBy('w.position', 'ASC')
             ->getQuery()
         ;
 
@@ -37,12 +37,28 @@ class WorkRepository extends EntityRepository
     }
 
 
+    public function getWorksPublished($page, $nbPerPage)
+    {
+        $query = $this->getPublishedQueryBuilder();
+
+        $query            
+            ->setFirstResult(($page-1) * $nbPerPage)            
+            ->setMaxResults($nbPerPage)
+        ;
+        
+        return new Paginator($query, true);
+    }
+
+
     public function getPublishedQueryBuilder()
     {
         return $this
             ->createQueryBuilder('w')
             ->where('w.published = :published')
             ->setParameter('published', true)
+            ->orderBy('w.position', 'ASC')
         ;
     }
+
+
 }

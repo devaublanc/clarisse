@@ -28,8 +28,8 @@ class Work
     protected $category;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist"})     
-     * @Assert\Valid()
+     * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist", "remove"})     
+     * @Assert\Valid()     
      */
     private $image;
 
@@ -61,6 +61,7 @@ class Work
      *
      * @ORM\Column(name="title", type="string", length=255)    
      * @Assert\Length(min=10)
+     * @Assert\NotBlank()
      */
     private $title;
 
@@ -71,6 +72,14 @@ class Work
      * @Assert\NotBlank()
      */
     private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="position", type="integer")
+     * @Assert\Type(type="integer", message="The value {{ value }} is not a number")
+     */
+    private $position;
 
     /**
      * @ORM\Column(name="published", type="boolean")
@@ -262,5 +271,51 @@ class Work
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \Dai\PortfolioBundle\Entity\Category $category
+     * @return Work
+     */
+    public function setCategory(\Dai\PortfolioBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \Dai\PortfolioBundle\Entity\Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Work
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

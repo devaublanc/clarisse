@@ -4,6 +4,7 @@ namespace Dai\PortfolioBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Category
@@ -26,6 +27,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $name;
 
@@ -70,5 +72,38 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add works
+     *
+     * @param \Dai\PortfolioBundle\Entity\Work $works
+     * @return Category
+     */
+    public function addWork(\Dai\PortfolioBundle\Entity\Work $works)
+    {
+        $this->works[] = $works;
+
+        return $this;
+    }
+
+    /**
+     * Remove works
+     *
+     * @param \Dai\PortfolioBundle\Entity\Work $works
+     */
+    public function removeWork(\Dai\PortfolioBundle\Entity\Work $works)
+    {
+        $this->works->removeElement($works);
+    }
+
+    /**
+     * Get works
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getWorks()
+    {
+        return $this->works;
     }
 }
