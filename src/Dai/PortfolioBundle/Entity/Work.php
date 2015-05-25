@@ -28,8 +28,8 @@ class Work
     protected $category;
 
     /**
-     * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist", "remove"})     
-     * @Assert\Valid()     
+     * @ORM\OneToOne(targetEntity="Dai\PortfolioBundle\Entity\Image", cascade={"persist", "remove"})
+     * @Assert\Valid()
      */
     private $image;
 
@@ -59,7 +59,7 @@ class Work
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)    
+     * @ORM\Column(name="title", type="string", length=255)
      * @Assert\Length(max=50)
      * @Assert\NotBlank()
      */
@@ -97,7 +97,7 @@ class Work
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -120,7 +120,7 @@ class Work
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -143,7 +143,7 @@ class Work
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -166,7 +166,7 @@ class Work
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -189,7 +189,7 @@ class Work
     /**
      * Get published
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getPublished()
     {
@@ -212,7 +212,7 @@ class Work
     /**
      * Get image
      *
-     * @return \Dai\PortfolioBundle\Entity\Image 
+     * @return \Dai\PortfolioBundle\Entity\Image
      */
     public function getImage()
     {
@@ -245,7 +245,7 @@ class Work
     /**
      * Get tags
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
     {
@@ -268,7 +268,7 @@ class Work
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -291,7 +291,7 @@ class Work
     /**
      * Get category
      *
-     * @return \Dai\PortfolioBundle\Entity\Category 
+     * @return \Dai\PortfolioBundle\Entity\Category
      */
     public function getCategory()
     {
@@ -314,7 +314,7 @@ class Work
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {

@@ -14,36 +14,36 @@
 
                 <div class="form-group">
                     {{ form_label(form.title, "Title", {'label_attr': {'class': 'control-label'}}) }}
-                    {{ form_errors(form.title) }}
+                    <div class="text-danger">{{ form_errors(form.title) }}</div>
                     {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
                 <div class="form-group">
                     {{ form_label(form.description, "Description", {'label_attr': {'class': 'control-label'}}) }}
-                    {{ form_errors(form.description) }}
+                    <div class="text-danger">{{ form_errors(form.description) }}</div>
                     {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
                 <div class="form-group">
                     {{ form_label(form.position, "Position", {'label_attr': {'class': 'control-label'}}) }}
-                    {{ form_errors(form.position) }}
+                    <div class="text-danger">{{ form_errors(form.position) }}</div>
                     {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
                 <div class="form-group">
                     {{ form_label(form.category, "Category", {'label_attr': {'class': 'control-label'}}) }}
-                    {{ form_errors(form.category) }}
+                    <div class="text-danger">{{ form_errors(form.category) }}</div>
                     {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
                 <div class="form-group">                    
-                    {{ form_errors(form.image) }}
+                    <div class="text-danger">{{ form_errors(form.image) }}</div>
                     {{ form_widget(form.image) }}
                 </div>
                 
 
                 <div class="form-group">
-                    {{ form_errors(form.published) }}
+                    <div class="text-danger">{{ form_errors(form.published) }}</div>
                     <label>
                         {{ form_widget(form.published) }} {{ form_label(form.published, "Published") }}
                     </label>
