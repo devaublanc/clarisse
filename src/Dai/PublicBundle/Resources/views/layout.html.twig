@@ -11,12 +11,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    {% stylesheets filter='cssrewrite'
-      '@DaiPublicBundle/Resources/public/js/node_modules/bootstrap/dist/css/bootstrap.min.css'
-      '@DaiPublicBundle/Resources/public/css/animate.css'
-      '@DaiPublicBundle/Resources/public/css/style.css' %}
-      <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
-    {% endstylesheets %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/daipublic/js/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/daipublic/css/animate.css') }}" type="text/css" media="all" />
+        <link rel="stylesheet" href="{{ asset('bundles/daipublic/css/style.css') }}" type="text/css" media="all" />
+    {% endblock %}
 
     <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
     <style>
@@ -30,11 +29,8 @@
     {% block content %}
     {% endblock %}
 
-    {% javascripts '@DaiPublicBundle/Resources/public/js/bundle.js' %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-
-    {% block javascripts %}        
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/daipublic/js/bundle.js') }}"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript" src="{{ asset('bundles/daipublic/js/viewport.js') }}"></script>
         <script type="text/javascript">
