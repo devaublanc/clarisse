@@ -40,7 +40,7 @@ class Image
 
     /**
      * @Assert\Image(
-     * maxWidth = 500,
+     * maxWidth = 750,
      * minWidth = 100
      * )
     */

@@ -8,7 +8,7 @@ $yellow: #fec785;
 $blue: #4c7ab8;
 $red: #f89692;
 $grey: #babcbe;
-$brown: #FFF4DC;
+$brown: #f89692;
 $blueLight: #9ECCCF;
 
 .hid{
@@ -82,29 +82,33 @@ body.brown {
     .introduction {
         margin-top: 7%;
         .introduction__title {
-            color: $blue;
+            color: #FFF;
         }
         .introduction__description {
-            color: $blue;
+            color: #FFF;
         }
         .introdcution__paragraph {
-            color: $blue;
+            color: #FFF;
         }
         .introduction__link {
-            border-color: $blue;
-            color: $blue;
+            border-color: #FFF;
+            color: #FFF;
         }
         .introduction__link:hover {
-          color: #FEC785;
-          border-color: #FEC785;
+          color: $blue;
+          border-color: $blue;
           text-decoration: none;
         }
     }
+    .red {
+        color: #FFF;
+        border-color: #FFF;
+    }
     .separator {
-        background: $blue;
+        background: #FFF;
     }
     .footer {
-        color: $blue;
+        color: #FFF;
     }
 }
 body.white {
