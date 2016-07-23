@@ -15,6 +15,7 @@ class LoadWork implements FixtureInterface
         $work1 = new Work();
         $work1->setTitle('Work title 1');
         $work1->setDescription('Work description 1');
+        $work1->setPosition(1);
 
         $image1 = new Image();
         $image1->setUrl('image1.png');
@@ -26,7 +27,7 @@ class LoadWork implements FixtureInterface
         $work2 = new Work();
         $work2->setTitle('Work title 2');
         $work2->setDescription('Work description 2');
-        $work2->setDescription('Work description 2');
+        $work2->setPosition(2);
 
         $image2 = new Image();
         $image2->setUrl('image2.png');
@@ -37,6 +38,7 @@ class LoadWork implements FixtureInterface
         $work3 = new Work();
         $work3->setTitle('Work title 3');
         $work3->setDescription('Work description 3');
+        $work3->setPosition(3);
 
         $image3 = new Image();
         $image3->setUrl('image3.png');
