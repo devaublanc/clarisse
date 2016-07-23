@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 
 class CategoryController extends Controller
-{ 
+{
 
     public function addAction(Request $request)
     {
@@ -25,7 +25,7 @@ class CategoryController extends Controller
             $em->persist($category);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Category saved');
+            $request->getSession()->getFlashBag()->add('notice', 'Category sauvegardé');
 
             return $this->redirect($this->generateUrl('dai_work_index', array('id' => $category->getId())));
         }

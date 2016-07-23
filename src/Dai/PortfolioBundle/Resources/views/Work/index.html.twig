@@ -1,19 +1,19 @@
 {% extends 'DaiPortfolioBundle::layout.html.twig' %}
 
 {% block content %}
-    
-    
+
+
     <div class="page-header">
-        <h2>Work</h2>
+        <h2>Peintures</h2>
     </div>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Position</th>
-                <th>Title</th>                
-                <th>Preview</th>
-                <th>Category</th>
-                <th>Published</th>
+                <th>Titre</th>
+                <th>Aperçu</th>
+                <th>Catégorie</th>
+                <th>Publié</th>
                 <th>Date</th>
                 <th>Actions</th>
             </tr>
@@ -32,21 +32,21 @@
                         />
                     </td>
 
-                    <td> 
+                    <td>
                         {{ work.category ? work.category.name }}
                     </td>
-                    <td>{{ work.published ? '<span class="label label-success">yes</span>' : '<span class="label label-warning">no</span>' }}</td>
+                    <td>{{ work.published ? '<span class="label label-success">oui</span>' : '<span class="label label-warning">non</span>' }}</td>
                     <td>{{ work.date|date('d-m-Y') }}</td>
                     <td>
-                        <a href="{{ path('dai_work_edit', {'id': work.id}) }}" class="btn btn-xs btn-default">Edit</a>        
-                        <a href="{{ path('dai_work_delete', {'id': work.id}) }}" class="btn btn-xs btn-danger">delete</a>        
+                        <a href="{{ path('dai_work_edit', {'id': work.id}) }}" class="btn btn-xs btn-default">Modifier</a>
+                        <a href="{{ path('dai_work_delete', {'id': work.id}) }}" class="btn btn-xs btn-danger">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <ul class="pagination">        
+    <ul class="pagination">
         {% for p in range(1, nbPages) %}
             <li{% if p == page %} class="active"{% endif %}>
                 <a href="{{ path('dai_work_index', {'page': p}) }}">{{ p }}</a>

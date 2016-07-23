@@ -43,11 +43,11 @@ ItemClass.prototype.build = function () {
 ItemClass.prototype.getMask = function (data) {
 
     var mask;
-    this.item.find('.isotope__item__mask').remove();    
-    
+    this.item.find('.isotope__item__mask').remove();
+
     mask = $('<div>').addClass('isotope__item__mask')
         .attr('data-mask', '')
-        .css('background-color', this.pickColor())
+        .css('background-color', 'rgba(0,0,0,0.8)')
         .hide();
 
     mask.css({

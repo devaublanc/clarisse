@@ -9,5 +9,6 @@
 /composer.phar
 /vendor/
 /web/bundles/
+src/Dai/PublicBundle/Resources/public/compass/.sass-cache/
 /src/Dai/PortfolioBundle/Resources/public/js/node_modules
 /src/Dai/PublicBundle/Resources/public/js/node_modules
