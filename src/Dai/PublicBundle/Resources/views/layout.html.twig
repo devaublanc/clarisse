@@ -3,7 +3,7 @@
 <head>
     <title>
         {% block title %}
-            Dai Gondo | Graphic Designer
+            Clarisse de Vaublanc | Artiste peintre
         {% endblock %}
     </title>
 
@@ -14,15 +14,16 @@
         <link rel="stylesheet" href="{{ asset('bundles/daipublic/js/node_modules/bootstrap/dist/css/bootstrap.min.css') }}" type="text/css" media="all" />
         <link rel="stylesheet" href="{{ asset('bundles/daipublic/css/animate.css') }}" type="text/css" media="all" />
         <link rel="stylesheet" href="{{ asset('bundles/daipublic/css/style.css') }}" type="text/css" media="all" />
-    {% endblock %} 
+    {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <meta name="title" content="Dai Gondo | Freelance Graphic Designer based in Paris" />
-    <meta name="desciption" content="Dai Gondo is an young independent french/japanese artist, art director and graphic designer and based in Paris.">
+    <meta name="title" content="Clarisse de Vaublanc | Artiste peintre" />
+    <meta name="desciption" content="Née le 24 septembre 1962 dans une petite ville de Saone et Loire , Découvre à 12 ans la magie des couleurs primaires au collège Arrivée à Paris à 20 ans suit des cours du soir à la faculté des Arts plastiques Puis oublie le dessin et la peinture jusqu’en l’an 2000 Depuis reprend assidument des cours de peinture à l’huile Expose rarement et propose à votre écran ces quelques tableaux ,accepte avec joie vos commentaires">
 
-    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,600' rel='stylesheet' type='text/css'>
     <style>
         body {
-            font-family: Futura, 'Nunito', sans-serif;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 300;
         }
     </style>
 </head>
@@ -33,16 +34,6 @@
 
     {% block javascripts %}
         <script type="text/javascript" src="{{ asset('bundles/daipublic/js/bundle.js') }}"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="{{ asset('bundles/daipublic/js/viewport.js') }}"></script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('.introduction__picture, .introdcution__paragraph__animate, .introdcution__title__animate').addClass("hid").viewportChecker({
-                    classToAdd: 'vis animated fadeInUp',
-                    offset: 50
-                });
-            });
-        </script>
     {% endblock %}
 
 </body>

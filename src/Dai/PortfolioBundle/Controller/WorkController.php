@@ -60,7 +60,7 @@ class WorkController extends Controller
             $em->persist($work);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Work saved');
+            $request->getSession()->getFlashBag()->add('notice', 'Peinture sauvegardé');
 
             return $this->redirect($this->generateUrl('dai_work_index', array('id' => $work->getId())));
         }
@@ -78,7 +78,7 @@ class WorkController extends Controller
         $work = $em->getRepository('DaiPortfolioBundle:Work')->find($id);
 
         if (null === $work) {
-            throw new NotFoundHttpException("Work d'id ".$id." n'existe pas.");
+            throw new NotFoundHttpException("La peinture d'id ".$id." n'existe pas.");
         }
 
         $form = $this->createForm(new WorkEditType(), $work);
@@ -87,7 +87,7 @@ class WorkController extends Controller
             // Inutile de persister ici, Doctrine connait déjà notre annonce
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Work updated');
+            $request->getSession()->getFlashBag()->add('notice', 'Peinture mise à jour');
 
             return $this->redirect($this->generateUrl('dai_work_index', array('id' => $work->getId())));
         }
@@ -114,7 +114,7 @@ class WorkController extends Controller
             $em->remove($work);
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('info', "Work has been deleted");
+            $request->getSession()->getFlashBag()->add('info', "La peinture a bien été supprimé");
 
             return $this->redirect($this->generateUrl('dai_work_index'));
         }

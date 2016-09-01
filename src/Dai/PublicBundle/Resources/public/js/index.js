@@ -3,18 +3,20 @@ global.$ = require('jquery');
 
 // modules
 var ItemClass = require('./modules/ItemClass.js');
-var PageClass = require('./modules/PageClass.js');
 var FeedClass = require('./modules/FeedClass.js');
+var CarouselClass = require('./modules/CarouselClass.js');
 
 new FeedClass($('[data-feed]'))
 
 $(window).load(function() {
-    var page = new PageClass();
-    
+
+    var carousel = new CarouselClass($('[data-carousel]'));
 
     $('[data-item]').each(function () {
         new ItemClass($(this));
+        $(this).on('click', function () {
+            carousel.showItem($(this).index());
+        })
     });
-
 
 });
