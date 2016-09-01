@@ -3,13 +3,8 @@
 /*-------------------------------------------*\
   VARIABLES
 /*-------------------------------------------*/
-$green: #8fd0ad;
-$yellow: #fec785;
-$blue: #4c7ab8;
-$red: #f89692;
+$orange: #ff3706;
 $grey: #babcbe;
-$brown: #f89692;
-$blueLight: #9ECCCF;
 
 .hid{
      opacity:0;
@@ -25,134 +20,24 @@ body, header {
     background-color: #FFF;
     @include transition(background-color 1s .1s, color 2s);
 }
-a:focus, a:hover {
-    text-decoration: none;
-}
+
 .hidden {
     display: none;
 }
 
-body.blue {
-    color: red;
-    background-color: $blueLight;
-    .header {
-        background-color: $blueLight;
-    }
-    .introduction {
-        margin-top: 7%;
-        .introduction__title {
-            color: #FFF;
-        }
-        .introduction__description {
-            color: #FFF;
-        }
-        .introdcution__paragraph {
-            color: #FFF;
-            &.lol {
-                font-size: 1em;
-                margin-top: 75px;
-                margin-bottom: 90px;
-            }
-        }
-    }
-    .green {
-        color: #FFF;
-        border-color: #FFF;
-    }
-    .separator {
-        background: #FFF;
-    }
-    .footer {
-        color: #FFF;
-    }
-    .sidebar {
-        color: #FFF;
-        a {
-            color: #FFF;
-        }
-    }
-}
-
-body.brown {
-    color: red;
-    background-color: $brown;
-    .header {
-        background-color: $brown;
-    }
-    .introduction {
-        margin-top: 7%;
-        .introduction__title {
-            color: #FFF;
-        }
-        .introduction__description {
-            color: #FFF;
-        }
-        .introdcution__paragraph {
-            color: #FFF;
-        }
-        .introduction__link {
-            border-color: #FFF;
-            color: #FFF;
-        }
-        .introduction__link:hover {
-          color: $blue;
-          border-color: $blue;
-          text-decoration: none;
-        }
-    }
-    .red {
-        color: #FFF;
-        border-color: #FFF;
-    }
-    .separator {
-        background: #FFF;
-    }
-    .footer {
-        color: #FFF;
-    }
-    .sidebar {
-        color: #FFF;
-        a {
-            color: #FFF;
-        }
-    }
-}
-body.white {
-    color: red;
-    background-color: #FFF;
-    .header {
-        background-color: #FFF;
-    }
-}
-
-.toto {
-    width: 300px;
-    height: 300px;
-    background: #F0F;
-}
-
-a {
+.link {
     font-size: 1.45em;
-    color: $blue;
+    color: #000;
     text-decoration: none;
+    border-bottom: 1px solid $orange;
     padding-bottom: 4px;
     font-weight: normal;
-    &.green {
-        color: $green;
-        border-bottom: solid 3px $green;
-    }
-    &.red {
-        color: $red;
-        border-bottom: solid 3px $red;
-    }
-    &.yellow {
-        color: $yellow;
-        border-bottom: solid 3px $yellow;
-    }
-    &.blue {
-        color: $blue;
-        border-bottom: solid 3px $blue;
-    }
+}
+
+.link:focus, .link:hover {
+    text-decoration: none;
+    border-bottom: none;
+    color: $orange;
 }
 .separator {
     width: 50px;
@@ -168,7 +53,6 @@ a {
     width: 100%;
     background: #FFF;
     z-index: 2;
-    height: 135px;
 
     .container {
         position: relative;
@@ -176,15 +60,26 @@ a {
 
     .header__logo {
         margin: 0 auto;
-        width: 224px;
+        width: 400px;
+        color: #000;
         height: 100px;
         display: block;
         background-size: 100%;
         background-repeat: no-repeat;
-        margin-top: -86px;
-        svg {
-            width: 100%;
-        }
+        text-align: center;
+        text-decoration: none;
+        margin-top: 35px;
+        line-height: 30px;
+    }
+
+    .header__logo__title {
+        font-size: 35px;
+    }
+
+    .header__logo__subtitle {
+        font-size: 25px;
+        text-transform: uppercase;
+        color: $orange;
     }
 }
 
@@ -196,63 +91,6 @@ a {
 
 }
 
-
-/*-------------------------------------------*\
-  INTRODUCTION
-/*-------------------------------------------*/
-.introduction {
-    text-align: center;
-    text-transform: uppercase;
-    margin-bottom: 50px;
-    margin-top: 48px;
-    .introduction__title {
-        color: $yellow;
-        font-size: 2.6em;
-        letter-spacing: 4px;
-        margin-bottom: 16px;
-    }
-    .introduction__picture {
-        width: 100%;
-        margin: 0 auto;
-        img {
-            width: 70%;
-        }
-    }
-    .introduction__description {
-        color: $grey;
-        display: inline-block;
-        padding-top: 8px;
-        letter-spacing: 5px;
-        margin-top: 8px;
-    }
-
-    .introdcution__title__animate {
-        margin-top: 0px;    
-    }
-
-    .introdcution__paragraph {
-        color: $yellow;
-        text-transform: none;
-        font-size: 1.3em;
-        margin-top: 40px;
-        p {
-            margin-bottom: 30px;
-        }
-        a {
-            font-size: 1em;
-            color: #FFF;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    }
-    .introduction__link {
-        font-size: 1em;
-        border-bottom: solid 3px #FFF;
-        display: inline-block;
-        margin-top: 40px;
-    }
-}
 /*-------------------------------------------*\
   SITE CONTENT
 /*-------------------------------------------*/
@@ -272,21 +110,11 @@ a {
     top: 60%;
     z-index: 100;
     font-size: 16px;
-    color: $blueLight;
     a {
-        color: $blueLight;
         font-size: 16px;
     }
 }
-.vertical {
-    -ms-transform: rotate(-90deg); /* IE 9 */
-    -webkit-transform: rotate(-90deg); /* Chrome, Safari, Opera */
-    transform: rotate(-90deg);
-    transform-origin: left top 0;
-   -ms-transform-origin: left top 0; /* IE 9 */
-   -webkit-transform-origin: left top 0; /* Chrome, Safari, Opera */
-   transform-origin: left top 0;
-}
+
 
 /*-------------------------------------------*\
   FOOTER
@@ -305,14 +133,107 @@ a {
 }
 
 /*-------------------------------------------*\
+  CAROUSEL
+/*-------------------------------------------*/
+.carousel {
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.carousel__item {
+    display: none;
+    height: 95%;
+}
+
+.carousel__control {
+    width: 50px;
+    height: 50px;
+    background: #F0F;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
+    &.left {
+        left: 10px;
+    }
+
+    &.right {
+        right: 10px;
+    }
+}
+
+$border-color: lighten(#000, 75%);
+$border-active-color: lighten(#000, 50%);
+.arrow {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    text-indent: -9999px;
+    border: {
+        top: 2px solid #FFF;
+        left: 2px solid #FFF;
+    }
+    transition: all .3s ease-in-out;
+    text-decoration: none;
+    color: transparent;
+
+    &:hover {
+        border: {
+            color: #FFF;
+            width: 6px;
+        }
+    }
+
+    &:before {
+        display: block;
+        height: 200%;
+        width: 200%;
+        margin: {
+            left: -50%;
+            top: -50%;
+        }
+        content: "";
+        transform: rotate(45deg);
+    }
+
+    &.prev {
+        transform: rotate(-45deg);
+        left: 30px;
+    }
+
+    &.next {
+        transform: rotate(135deg);
+        right: 30px;
+    }
+}
+
+
+
+
+/*-------------------------------------------*\
   ISOTOPE
 /*-------------------------------------------*/
+
+.isotope__item {
+    cursor: pointer;
+}
+
 @media screen and (min-width:995px) and (max-width:1500px){
-    body{ 
+    body{
         .isotope__item {
             width: 48%;
         }
-    }   
+    }
 }
 .isotope {
     .isotope__item {
@@ -321,7 +242,7 @@ a {
         padding: 30px !important;
 
         img {
-            max-width: 100%;
+            width: 100%;
         }
     }
 
@@ -331,7 +252,7 @@ a {
         left: 0px;
         height: 100%;
         width: 100%;
-        background-color: $yellow;
+        background-color: $orange;
         padding: 25px;
         overflow: hidden;
         color: #FFF;
@@ -339,17 +260,16 @@ a {
     }
 
     .isotope__item__mask__separator {
-        width: 25px;
-        height: 4px;
+        width: 100%;
+        height: 1px;
         background: #FFF;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
     }
 
     .isotope__item__mask__paragraph {
         font-size: 1.3em;
         width: 53%;
         margin-bottom: 20px;
-        letter-spacing: 1px;
         -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
         animation-duration: 0.5s;
     }
@@ -357,7 +277,6 @@ a {
     .isotope__item__mask__title {
         text-transform: uppercase;
         font-weight: normal;
-        letter-spacing: 3px;
         font-size: 1.5em;
         margin-top: 0px;
         margin-bottom: 30px;
@@ -366,6 +285,7 @@ a {
 
     }
 }
+
 
 /*-------------------------------------------*\
   NAV
@@ -423,7 +343,5 @@ a {
             }
         }
     }
-    .sidebar {
-        top: 75%;
-    }
+
 }

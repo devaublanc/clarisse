@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-md-6 col-md-offset-2">
             <div class="page-header">
-                <h2>New work</h2>
+                <h2>Nouvelle peinture</h2>
             </div>
 
             {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}
@@ -13,7 +13,7 @@
                 {{ form_errors(form) }}
 
                 <div class="form-group">
-                    {{ form_label(form.title, "Title", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.title, "Titre", {'label_attr': {'class': 'control-label'}}) }}
                     <div class="text-danger">{{ form_errors(form.title) }}</div>
                     {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                 </div>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form_label(form.category, "Category", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.category, "Catégorie", {'label_attr': {'class': 'control-label'}}) }}
                     {{ form_errors(form.category) }}
                     {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
                 </div>
@@ -42,23 +42,23 @@
                     {{ form_widget(form.date) }}
                 </div>
 
-                <div class="form-group">                    
+                <div class="form-group">
                     <div class="text-danger">{{ form_errors(form.image) }}</div>
                     {{ form_widget(form.image) }}
                 </div>
-                
+
 
                 <div class="form-group">
                     <div class="text-danger">{{ form_errors(form.published) }}</div>
                     <label>
-                        {{ form_widget(form.published) }} {{ form_label(form.published, "Published") }}
+                        {{ form_widget(form.published) }} {{ form_label(form.published, "Publié") }}
                     </label>
                 </div>
 
                 {{ form_rest(form) }}
 
                 <div class="form-group overflow">
-                    <input type="submit" class="btn btn-primary pull-right" value="Save"/>
+                    <input type="submit" class="btn btn-primary pull-right" value="Sauvegarder"/>
                 </div>
 
 
@@ -68,4 +68,3 @@
 
 
 {% endblock %}
-

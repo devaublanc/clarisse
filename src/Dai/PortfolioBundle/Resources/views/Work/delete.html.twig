@@ -6,21 +6,21 @@
 
 
 {% block content %}
-    
+
     <div class="container">
         <div class="col-md-6 col-md-offset-2">
             <div class="page-header">
-                <h2>Delete work</h2>
+                <h2>Supprimer la peinture</h2>
             </div>
             <div class="text-center">
                 <div class="alert alert-info">
-                    Are you sure to delete "{{ work.title }}" ?
+                    Êtes vous sur de voiloir supprimer "{{ work.title }}" ?
                 </div>
-                 
+
                 <form action="{{ path('dai_work_delete', {'id': work.id}) }}" method="post">
-                    <input type="submit" value="Yes" class="btn btn-danger" />
+                    <input type="submit" value="Oui" class="btn btn-danger" />
                     {{ form_rest(form) }}
-                </form>            
+                </form>
             </div>
         </div>
     </div>

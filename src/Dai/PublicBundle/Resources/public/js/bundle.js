@@ -5,23 +5,99 @@ global.$ = require('jquery');
 
 // modules
 var ItemClass = require('./modules/ItemClass.js');
-var PageClass = require('./modules/PageClass.js');
 var FeedClass = require('./modules/FeedClass.js');
+var CarouselClass = require('./modules/CarouselClass.js');
 
 new FeedClass($('[data-feed]'))
 
 $(window).load(function() {
-    var page = new PageClass();
-    
+
+    var carousel = new CarouselClass($('[data-carousel]'));
 
     $('[data-item]').each(function () {
         new ItemClass($(this));
+        $(this).on('click', function () {
+            carousel.showItem($(this).index());
+        })
     });
 
-
 });
+
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./modules/FeedClass.js":2,"./modules/ItemClass.js":3,"./modules/PageClass.js":4,"isotope-layout":11,"jquery":18}],2:[function(require,module,exports){
+},{"./modules/CarouselClass.js":2,"./modules/FeedClass.js":3,"./modules/ItemClass.js":4,"isotope-layout":11,"jquery":18}],2:[function(require,module,exports){
+var $ = require('jquery');
+
+var CarouselClass = function (carousel) {
+    this.carousel = carousel;
+    this.pictures = this.carousel.find('[data-carousel-item]')
+    this.nextBtn = this.carousel.find('[data-carousel-next]');
+    this.prevBtn = this.carousel.find('[data-carousel-prev]');
+    this.carousel.hide();
+    this.bind();
+    this.currentIndex = 0;
+};
+
+CarouselClass.prototype.bind = function () {
+    var that = this;
+
+    this.prevBtn.on('click', function () {
+        that.prev();
+    });
+
+    this.nextBtn.on('click', function () {
+        that.next();
+    });
+
+    this.carousel.on('click', function (e) {
+        that.close(e.target)
+    })
+};
+
+CarouselClass.prototype.prev = function () {
+    this.showItem(this.currentIndex - 1);
+};
+
+CarouselClass.prototype.next = function () {
+    this.showItem(this.currentIndex + 1);
+};
+
+CarouselClass.prototype.close = function (target) {
+    if (target === this.carousel[0]) {
+        this.carousel.hide();
+    }
+
+};
+
+CarouselClass.prototype.showItem = function (index) {
+
+    var min = 0;
+    var max = this.pictures.length;
+
+    this.currentIndex = index;
+    this.pictures.hide();
+    this.pictures.eq(this.currentIndex).show();
+
+    console.log('min', min);
+    console.log('max', max);
+    console.log('this.currentIndex', this.currentIndex);
+    if (this.currentIndex + 1 >= max) {
+        this.nextBtn.hide();
+    } else {
+        this.nextBtn.show();
+    }
+
+    if (this.currentIndex <= min) {
+        this.prevBtn.hide();
+    } else {
+        this.prevBtn.show();
+    }
+
+    this.carousel.show();
+}
+
+module.exports = CarouselClass;
+
+},{"jquery":18}],3:[function(require,module,exports){
 var $ = require('jquery');
 var ItemClass = require('./ItemClass.js');
 var jQBridget = require('jquery-bridget');
@@ -92,7 +168,7 @@ FeedClass.prototype.refresh = function () {
 };
 
 module.exports = FeedClass;
-},{"./ItemClass.js":3,"isotope-layout":11,"jquery":18,"jquery-bridget":17}],3:[function(require,module,exports){
+},{"./ItemClass.js":4,"isotope-layout":11,"jquery":18,"jquery-bridget":17}],4:[function(require,module,exports){
 (function (global){
 var $ = require('jquery');
 var Isotope = require('isotope-layout');
@@ -139,11 +215,11 @@ ItemClass.prototype.build = function () {
 ItemClass.prototype.getMask = function (data) {
 
     var mask;
-    this.item.find('.isotope__item__mask').remove();    
-    
+    this.item.find('.isotope__item__mask').remove();
+
     mask = $('<div>').addClass('isotope__item__mask')
         .attr('data-mask', '')
-        .css('background-color', this.pickColor())
+        .css('background-color', 'rgba(0,0,0,0.8)')
         .hide();
 
     mask.css({
@@ -204,52 +280,9 @@ ItemClass.prototype.bind = function () {
 };
 
 module.exports = ItemClass;
+
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"isotope-layout":11,"jquery":18}],4:[function(require,module,exports){
-var $ = require('jquery');
-
-var PageClass = function () {
-    this.linkProfil = $('[data-link-profil]');
-    this.linkPortfolio = $('[data-link-portfolio]');
-    this.linkContact = $('[data-link-contact]');
-    $('[data-page-profil], [data-page-contact]').hide();
-    this.bind();    
-};
-
-PageClass.prototype.bind = function () {
-    var that = this;
-
-    this.linkPortfolio.on('click', function (e) {
-        e.preventDefault();
-        that.changeColor('white');
-        that.getPage('portfolio');
-    });
-
-    this.linkProfil.on('click', function (e) {
-        e.preventDefault();
-        that.changeColor('blue');
-        that.getPage('profil');
-    });
-
-    this.linkContact.on('click', function (e) {
-        e.preventDefault();
-        that.changeColor('brown');
-        that.getPage('contact');
-    });
-};
-
-PageClass.prototype.changeColor = function (color) {
-    $('body').removeClass('white brown blue')
-    $('body').addClass(color);
-};
-
-PageClass.prototype.getPage = function (page) {
-    $('[data-page]').hide();
-    $('[data-page-' + page + ']').show();
-};
-
-module.exports = PageClass;
-},{"jquery":18}],5:[function(require,module,exports){
+},{"isotope-layout":11,"jquery":18}],5:[function(require,module,exports){
 /*!
  * getStyleProperty v1.0.4
  * original by kangax
