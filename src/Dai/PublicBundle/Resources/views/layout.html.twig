@@ -28,8 +28,37 @@
 </head>
 <body>
 
-    {% block content %}
-    {% endblock %}
+    <div class="site">
+
+        <header class="header">
+            <div class="container-fluid">
+                <a href="#" class="header__logo" data-logo>
+                    <div class="header__logo__title">Clarisse de Vaublanc </div>
+                    <div class="header__logo__subtitle">Artiste peintre</div>
+                </a>
+                <nav class="nav">
+                    <div class="nav__left">
+                        <a href="#" class="link">Gallerie</a>
+                        <a href="#" class="link">Biographie</a>
+                        <a href="#" class="link hidden-sm hidden-lg hidden-md">Contact</a>
+                    </div>
+                    <div class="nav__right hidden-xs">
+                        <a href="#" class="link">Contact</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+
+
+
+    <footer class="footer">
+        &copy; All right Reserved 2016. Copyright Clarisse de Vaublanc
+    </footer>
 
     {% block javascripts %}
         <script type="text/javascript" src="{{ asset('bundles/daipublic/js/bundle.js') }}"></script>

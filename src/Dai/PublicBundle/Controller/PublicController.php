@@ -54,7 +54,7 @@ class PublicController extends Controller
 
             if ($page > $nbPages) {
                 throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-            }            
+            }
 
             return $this->render('DaiPublicBundle:Public:index.html.twig', array(
                 'works' => $works,
@@ -65,6 +65,11 @@ class PublicController extends Controller
 
         }
 
+    }
+
+    public function contactAction(Request $request)
+    {
+        return $this->render('DaiPublicBundle:Public:contact.html.twig');
     }
 
 }
