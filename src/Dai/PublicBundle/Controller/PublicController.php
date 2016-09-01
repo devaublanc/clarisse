@@ -72,4 +72,9 @@ class PublicController extends Controller
         return $this->render('DaiPublicBundle:Public:contact.html.twig');
     }
 
+    public function bioAction(Request $request)
+    {
+        return $this->render('DaiPublicBundle:Public:bio.html.twig');
+    }
+
 }
