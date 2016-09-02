@@ -11,3 +11,9 @@ $grey: #babcbe;
 $brown: #FFF4DC;
 $blueLight: #9ECCCF;
 
+.flex {
+    display: flex;
+    .form-group {
+        margin-right: 35px;
+    }
+}

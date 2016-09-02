@@ -14,6 +14,8 @@ class LoadWork implements FixtureInterface
         //work1
         $work1 = new Work();
         $work1->setTitle('Work title 1');
+        $work1->setWidth('200');
+        $work1->setheight('200');
         $work1->setDescription('Work description 1');
         $work1->setPosition(1);
 
@@ -26,6 +28,8 @@ class LoadWork implements FixtureInterface
         //work2
         $work2 = new Work();
         $work2->setTitle('Work title 2');
+        $work2->setWidth('200');
+        $work2->setheight('200');
         $work2->setDescription('Work description 2');
         $work2->setPosition(2);
 
@@ -37,6 +41,8 @@ class LoadWork implements FixtureInterface
         //work3
         $work3 = new Work();
         $work3->setTitle('Work title 3');
+        $work3->setWidth('200');
+        $work3->setheight('200');
         $work3->setDescription('Work description 3');
         $work3->setPosition(3);
 
