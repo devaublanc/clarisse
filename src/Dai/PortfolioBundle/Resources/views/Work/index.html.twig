@@ -14,7 +14,8 @@
                 <th>Aperçu</th>
                 <th>Catégorie</th>
                 <th>Publié</th>
-                <th>Date</th>
+                <th>Disponible</th>
+                <th>Dimensions</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -36,7 +37,8 @@
                         {{ work.category ? work.category.name }}
                     </td>
                     <td>{{ work.published ? '<span class="label label-success">oui</span>' : '<span class="label label-warning">non</span>' }}</td>
-                    <td>{{ work.date|date('d-m-Y') }}</td>
+                    <td>{{ work.available ? '<span class="label label-success">oui</span>' : '<span class="label label-warning">non</span>' }}</td>
+                    <td>{{ work.width }}/{{ work.width }} (cm)</td>
                     <td>
                         <a href="{{ path('dai_work_edit', {'id': work.id}) }}" class="btn btn-xs btn-default">Modifier</a>
                         <a href="{{ path('dai_work_delete', {'id': work.id}) }}" class="btn btn-xs btn-danger">Supprimer</a>

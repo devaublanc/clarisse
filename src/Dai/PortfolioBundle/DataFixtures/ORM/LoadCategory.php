@@ -7,14 +7,12 @@ use Dai\PortfolioBundle\Entity\Category;
 
 class LoadCategory implements FixtureInterface
 {
-  
+
     public function load(ObjectManager $manager)
     {
         $names = array(
-            'Chevignon',
-            'Oxbow',
-            'Quicksilver',
-            'Levis',      
+            'Huile',
+            'Crayon'            
             );
 
         foreach ($names as $name) {
