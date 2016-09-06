@@ -174,7 +174,7 @@ a.mail {
     text: initial;
     font-style: italic;
     font-size: 0.95em;
-    background: #FFF;
+    background: rgba(255, 255, 255, .5);
     border-top: solid 1px #adadad;
 }
 
@@ -182,6 +182,7 @@ a.mail {
   CAROUSEL
 /*-------------------------------------------*/
 .carousel {
+    opacity: 0;
     position: fixed;
     align-items: center;
     justify-content: center;
@@ -194,7 +195,7 @@ a.mail {
 
 .carousel__item {
     display: none;
-    width: 95%;
+    height: 98%;
 }
 
 .carousel__control {
@@ -431,6 +432,9 @@ a.mail {
 @media (max-width: 768px) {
     .site-content {
       padding-top: 120px;
+    }
+    .carousel {
+        display: none;
     }
     .header {
         height: 140px;

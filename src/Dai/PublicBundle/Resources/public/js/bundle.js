@@ -65,6 +65,7 @@ CarouselClass.prototype.next = function () {
 CarouselClass.prototype.close = function (target) {
     if (target === this.carousel[0]) {
         this.carousel.hide();
+        this.carousel.css({opacity: 0});
     }
 
 };
@@ -91,6 +92,7 @@ CarouselClass.prototype.showItem = function (index) {
         this.prevBtn.show();
     }
 
+    this.carousel.css({opacity: 1});
     this.carousel.show();
 }
 
