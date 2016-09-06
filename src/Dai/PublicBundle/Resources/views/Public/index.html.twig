@@ -8,7 +8,7 @@
         {% for work in works %}
             <img class="carousel__item" data-carousel-item src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
         {% endfor %}
-        <div class="close" data-carousel-close></div>
+        <div class="close-btn" data-carousel-close></div>
     </div>
 
     <section class="container-fluid site-content">
@@ -26,14 +26,26 @@
                         data-category="{{ work.category ? work.category.name }}"
                         data-reference="{{ work.description }}"
                         class="isotope__item">
+                        <div class="isotope__item__available {{ work.available ? 'available' : 'unavailable' }} ">
+                            {{ work.available ? 'disponible' : 'non disponible' }}
+                        </div>
+                        <div class="isotope__item__size">
+                            {{ work.width }}/{{ work.height }}cm
+                        </div>
                         <img data-carousel-item src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
                     </article>
                 {% endfor %}
             </div>
 
-            {% if needPager %}
-                <button class="btn btn-default btn-lg btn-block" data-btn-refresh-feed style="margin-bottom: 100px; margin-top: 100px">More</button>
-            {% endif %}
+
+            <ul class="pagination">
+                {% for p in range(1, nbPages) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('dai_public_index', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
         </div>
 
     </section>

@@ -12,60 +12,101 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class PublicController extends Controller
 {
 
-    public function indexAction(Request $request)
+    // public function indexAction(Request $request)
+    // {
+    //
+    //     $page = $request->query->get('page');
+    //
+    //     if ($page < 1) {
+    //         $page = 1;
+    //     }
+    //
+    //     $nbPerPage = 15;
+    //
+    //     $works = $this->getDoctrine()
+    //         ->getManager()
+    //         ->getRepository('DaiPortfolioBundle:Work')
+    //         ->getWorksPublished($page, $nbPerPage)
+    //     ;
+    //
+    //
+    //     $nbPages = ceil(count($works)/$nbPerPage);
+    //
+    //
+    //     if($request->isXmlHttpRequest()) {
+    //
+    //         if ($page > $nbPages) {
+    //             $response = new Response('ko', 200);
+    //         } else {
+    //
+    //             $results = array();
+    //             foreach ($works as $work) {
+    //                 $results[] = $this->render('DaiPublicBundle:Public:item.html.twig', array('work' => $work))->getContent();
+    //             }
+    //
+    //             $response = new Response(json_encode($results), 200);
+    //             $response->headers->set('Content-Type', 'application/json');
+    //         }
+    //
+    //         return $response;
+    //
+    //     } else {
+    //
+    //         if ($page > $nbPages) {
+    //             throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+    //         }
+    //
+    //         return $this->render('DaiPublicBundle:Public:index.html.twig', array(
+    //             'works' => $works,
+    //             'nbPages' => $nbPages,
+    //             'page' => $page,
+    //             'needPager' => $works->count() > $nbPerPage,
+    //         ));
+    //
+    //     }
+    //
+    // }
+
+
+
+    public function indexAction($page)
     {
 
-        $page = $request->query->get('page');
-
-        if ($page < 1) {
+        if (!$page) {
             $page = 1;
         }
 
-        $nbPerPage = 15;
+        if ($page < 1) {
+            throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
+        }
+
+        $nbPerPage = 20;
 
         $works = $this->getDoctrine()
             ->getManager()
             ->getRepository('DaiPortfolioBundle:Work')
-            ->getWorksPublished($page, $nbPerPage)
+            ->getWorks($page, $nbPerPage)
         ;
 
-
+        // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
         $nbPages = ceil(count($works)/$nbPerPage);
 
-
-        if($request->isXmlHttpRequest()) {
-
-            if ($page > $nbPages) {
-                $response = new Response('ko', 200);
-            } else {
-
-                $results = array();
-                foreach ($works as $work) {
-                    $results[] = $this->render('DaiPublicBundle:Public:item.html.twig', array('work' => $work))->getContent();
-                }
-
-                $response = new Response(json_encode($results), 200);
-                $response->headers->set('Content-Type', 'application/json');
-            }
-
-            return $response;
-
-        } else {
-
-            if ($page > $nbPages) {
-                throw $this->createNotFoundException("La page ".$page." n'existe pas.");
-            }
-
-            return $this->render('DaiPublicBundle:Public:index.html.twig', array(
-                'works' => $works,
-                'nbPages' => $nbPages,
-                'page' => $page,
-                'needPager' => $works->count() > $nbPerPage,
-            ));
-
+        // Si la page n'existe pas, on retourne une 404
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
         }
 
+        return $this->render('DaiPublicBundle:Public:index.html.twig', array(
+            'works' => $works,
+            'nbPages' => $nbPages,
+            'page' => $page
+        ));
+
     }
+
+
+
+
 
     public function contactAction(Request $request)
     {
