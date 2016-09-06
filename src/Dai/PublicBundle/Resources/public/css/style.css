@@ -456,7 +456,7 @@ a.mail {
 
   /* line 436, ../compass/sass/style.scss */
   .carousel {
-    display: none;
+    display: none !important;
   }
 
   /* line 439, ../compass/sass/style.scss */
