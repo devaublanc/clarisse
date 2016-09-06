@@ -5,6 +5,7 @@ var CarouselClass = function (carousel) {
     this.pictures = this.carousel.find('[data-carousel-item]')
     this.nextBtn = this.carousel.find('[data-carousel-next]');
     this.prevBtn = this.carousel.find('[data-carousel-prev]');
+    this.closeBtn = this.carousel.find('[data-carousel-close]');
     this.carousel.hide();
     this.bind();
     this.currentIndex = 0;
@@ -21,8 +22,8 @@ CarouselClass.prototype.bind = function () {
         that.next();
     });
 
-    this.carousel.on('click', function (e) {
-        that.close(e.target)
+    this.closeBtn.on('click', function (e) {
+        that.carousel.hide();
     })
 };
 
@@ -50,9 +51,7 @@ CarouselClass.prototype.showItem = function (index) {
     this.pictures.hide();
     this.pictures.eq(this.currentIndex).show();
 
-    console.log('min', min);
-    console.log('max', max);
-    console.log('this.currentIndex', this.currentIndex);
+
     if (this.currentIndex + 1 >= max) {
         this.nextBtn.hide();
     } else {

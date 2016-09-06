@@ -71,7 +71,6 @@ a.mail {
 
     .header__logo {
         margin: 0 auto;
-        width: 400px;
         color: #000;
         height: 100px;
         display: block;
@@ -142,6 +141,26 @@ a.mail {
 
 
 /*-------------------------------------------*\
+  PAGINATION
+/*-------------------------------------------*/
+.pagination {
+    margin-bottom: 100px;
+}
+
+.pagination>li>a, .pagination>li>span, .pagination>li>a:hover {
+    color: #000;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover {
+    background: #ff3706;
+    border-color: #ff3706;
+}
+
+
+
+
+
+/*-------------------------------------------*\
   FOOTER
 /*-------------------------------------------*/
 .footer {
@@ -149,12 +168,14 @@ a.mail {
     text-align: center;
     position: fixed;
     width: 100%;
-    bottom: 10px;
+    bottom: 0;
     padding: 15px 0px;
     color: #D2D1D1;
     text: initial;
     font-style: italic;
     font-size: 0.95em;
+    background: #FFF;
+    border-top: solid 1px #adadad;
 }
 
 /*-------------------------------------------*\
@@ -173,7 +194,7 @@ a.mail {
 
 .carousel__item {
     display: none;
-    height: 95%;
+    width: 95%;
 }
 
 .carousel__control {
@@ -194,8 +215,39 @@ a.mail {
     }
 }
 
-$border-color: lighten(#000, 75%);
-$border-active-color: lighten(#000, 50%);
+.close-btn {
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    width: 32px;
+    height: 32px;
+    opacity: 1;
+    cursor: pointer;
+}
+.close-btn:hover {
+    &:before {
+        width: 3px;
+    }
+    &:after {
+        width: 3px;
+    }
+}
+
+.close-btn:before, .close-btn:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 33px;
+    width: 2px;
+    background-color: #FFF;
+}
+.close-btn:before {
+    transform: rotate(45deg);
+}
+.close-btn:after {
+    transform: rotate(-45deg);
+}
+
 .arrow {
     cursor: pointer;
     display: inline-block;
@@ -271,6 +323,7 @@ $border-active-color: lighten(#000, 50%);
         }
     }
 
+
     .isotope__item__mask {
         position: absolute;
         top: 0px;
@@ -282,6 +335,41 @@ $border-active-color: lighten(#000, 50%);
         overflow: hidden;
         color: #FFF;
 
+    }
+
+    .isotope__item__size {
+        position: absolute;
+        bottom: 45px;
+        right: 45px;
+        color: #FFF;
+        font-size: 16px;
+        text-shadow: 2px 1px 2px #000;
+    }
+
+    .isotope__item__available {
+        color: #ffffff;
+        position: absolute;
+        right: 38px;
+        top: 37px;
+        text-shadow: 2px 0px 2px #000;
+        font-size: 11px;
+
+        &:before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #1fde08;
+            float: left;
+            margin-top: 3px;
+            margin-right: 5px;
+        }
+
+        &.unavailable {
+            &:before {
+                background: #dc0b0b;
+            }
+        }
     }
 
     .isotope__item__mask__separator {
@@ -342,10 +430,21 @@ $border-active-color: lighten(#000, 50%);
 
 @media (max-width: 768px) {
     .site-content {
-      padding-top: 200px;
+      padding-top: 120px;
     }
     .header {
-        height: 200px;
+        height: 140px;
+        .header__logo {
+            margin-top: 15px;
+        }
+
+        .header__logo__title {
+            font-size: 25px;
+        }
+
+        .header__logo__subtitle {
+            font-size: 18px;
+        }
     }
     .nav {
         overflow: hidden;
@@ -353,10 +452,11 @@ $border-active-color: lighten(#000, 50%);
             margin: 15px;
         }
         .nav__left {
-            top: 140px;
+            top: 90px;
             width: 100%;
             text-align: center;
             left: 0px;
+            font-size: 12px;
             .red {
                 display: inline-block !important;
             }
