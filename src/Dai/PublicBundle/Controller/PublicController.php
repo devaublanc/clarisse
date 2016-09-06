@@ -75,12 +75,12 @@ class PublicController extends Controller
         if (!$page) {
             $page = 1;
         }
-        
+
         if ($page < 1) {
             throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
         }
 
-        $nbPerPage = 10;
+        $nbPerPage = 20;
 
         $works = $this->getDoctrine()
             ->getManager()
