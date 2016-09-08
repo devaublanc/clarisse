@@ -26,7 +26,7 @@ $(window).load(function() {
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./modules/CarouselClass.js":2,"./modules/FeedClass.js":3,"./modules/ItemClass.js":4,"isotope-layout":11,"jquery":18}],2:[function(require,module,exports){
 var $ = require('jquery');
-
+//lol
 var CarouselClass = function (carousel) {
     this.carousel = carousel;
     this.pictures = this.carousel.find('[data-carousel-item]')

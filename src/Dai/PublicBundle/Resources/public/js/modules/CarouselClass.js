@@ -1,5 +1,5 @@
 var $ = require('jquery');
-
+//lol
 var CarouselClass = function (carousel) {
     this.carousel = carousel;
     this.pictures = this.carousel.find('[data-carousel-item]')

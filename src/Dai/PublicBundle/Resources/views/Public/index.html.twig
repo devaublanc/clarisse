@@ -20,20 +20,22 @@
                 data-url="{{ path ('dai_public_index') }}"
             >
                 {% for work in works %}
-                    <article
-                        data-item
-                        data-title="{{ work.title }}"
-                        data-category="{{ work.category ? work.category.name }}"
-                        data-reference="{{ work.description }}"
-                        class="isotope__item">
-                        <div class="isotope__item__available {{ work.available ? 'available' : 'unavailable' }} ">
-                            {{ work.available ? 'disponible' : 'non disponible' }}
-                        </div>
-                        <div class="isotope__item__size">
-                            {{ work.width }}/{{ work.height }}cm
-                        </div>
-                        <img data-carousel-item src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
-                    </article>
+                    {% if work.published %}
+                        <article
+                            data-item
+                            data-title="{{ work.title }}"
+                            data-category="{{ work.category ? work.category.name }}"
+                            data-reference="{{ work.description }}"
+                            class="isotope__item isotope__item col-lg-4 col-md-4 col-sm-6">
+                            <div class="isotope__item__available {{ work.available ? 'available' : 'unavailable' }} ">
+                                {{ work.available ? 'disponible' : 'non disponible' }}
+                            </div>
+                            <div class="isotope__item__size">
+                                {{ work.width }}/{{ work.height }}cm
+                            </div>
+                            <img data-carousel-item src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
+                        </article>
+                    {% endif %}
                 {% endfor %}
             </div>
 
