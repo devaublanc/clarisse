@@ -1,182 +1,55 @@
 {% extends 'DaiPublicBundle::layout.html.twig' %}
 
 {% block content %}
-    
-    <div class="site">
 
-            <header class="header">
-                <div class="container-fluid">
-                    <a href="#" class="header__logo" data-logo>                        
-                        {% include "DaiPublicBundle::logo.html.twig" %}
-                    </a>
-                    <nav class="nav">
-                        <div class="nav__left">
-                            <a href="#" class="green" data-link-profil>Profile</a>
-                            <a href="#" class="yellow" data-link-portfolio>Portfolio</a>
-                            <a href="#" class="red hidden-sm hidden-lg hidden-md" data-link-contact>Contact</a>
-                        </div>
-                        <div class="nav__right hidden-xs">
-                            <a href="#" class="red" data-link-contact>Contact</a>
-                        </div>
-                    </nav>
-                </div>
-            </header>
+    <div class="carousel" data-carousel>
+        <div class="arrow prev" data-carousel-prev></div>
+        <div class="arrow next chevron-right" data-carousel-next></div>
+        {% for work in works %}
+            <img class="carousel__item" data-carousel-item src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
+        {% endfor %}
+        <div class="close-btn" data-carousel-close></div>
+    </div>
 
-            <aside class="sidebar">
-                <div class="vertical">
-                    Follow me <a href="https://instagram.com/thisisdai" target="_blank">Instagram</a> / <a href="https://fr.pinterest.com/ThisisDai/" target="_blank">Pinterest</a>
-                </div>
-            </aside>
-
-            <section class="container-fluid site-content">
-                <div data-page data-page-portfolio class="animated fadeIn">
-                    <section class="introduction">
-                        <h1 class="introduction__title">Morceaux choisis</h1>
-                        <div class="separator"></div>
-                        <div class="introduction__description">Portfolio</div>
-                    </section>
-
-                    <div 
-                        id="isotope" 
-                        class="isotope" 
-                        data-feed
-                        data-url="{{ path ('dai_public_index') }}"
-                    >
-                        {% for work in works %}
-                            <article
-                                data-item
-                                data-title="{{ work.title }}"
-                                data-category="{{ work.category ? work.category.name }}"
-                                data-reference="{{ work.description }}"
-                                class="isotope__item col-lg-4 col-md-4 col-sm-6">
-                                <img src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
-                            </article>
-                        {% endfor %}
-                    </div> 
-
-                    {% if needPager %}
-                        <button class="btn btn-default btn-lg btn-block" data-btn-refresh-feed style="margin-bottom: 100px; margin-top: 100px">More</button>
-                    {% endif %}                   
-                </div>
-                <div data-page data-page-profil class="animated fadeIn">
-                    <section class="introduction">
-                        <h1 class="introduction__title">Mon nom est <br> Dai Gondo</h1>
-                        <div class="separator"></div>
-                        <div class="introduction__description">About</div>
-                        <div class="introdcution__paragraph">
-                            <p>
-                                Dai Gondo is an young independent french/japanese artist,<br> 
-                                art director and graphic designer and based in Paris.<br>
-                            </p>
-                            <p>
-                                He is available and looking forward<br> 
-                                to get position or to work as a freelance.
-                            </p>
-                        </div>
-                    </section>
-                    <section class="introduction">
-                        <h1 class="introduction__title">Things he enjoys</h1>
-                        <div class="separator"></div>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-6 block">
-                                        <div class="introduction__picture">
-                                            <img src="{{ asset('bundles/daipublic/images/profile/shoe.png') }}" alt="Shoe"/>
-                                        </div>
-                                        <h2 class="introduction__title introdcution__title__animate" style="margin-top:-40px">Great Scott !</h2>
-                                        <div class="introdcution__paragraph introdcution__paragraph__animate">
-                                            <p>
-                                                «Back to the future» is probably his<br> 
-                                                favorite movie. But he also shows a taste<br> 
-                                                for prison movies or any good flicks with<br> 
-                                                hungry zombies.
-                                            </p>                                            
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 block">
-                                        <div class="introduction__picture">                                         
-                                            <img src="{{ asset('bundles/daipublic/images/profile/gun.png') }}" alt="Gun"/>
-                                        </div>
-                                        <h2 class="introduction__title introdcution__title__animate" style="margin-top:-40px">Call of Duty</h2>
-                                        <div class="introdcution__paragraph introdcution__paragraph__animate">
-                                            <p>
-                                                He often plays video games like Call of Duty<br> 
-                                                with office colleagues, and kicks some<br> 
-                                                amazing goals in Fifa.
-                                            </p>                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 block">
-                                        <div class="introduction__picture">                                         
-                                            <img src="{{ asset('bundles/daipublic/images/profile/nas.png') }}" alt="Nas"/>
-                                        </div>
-                                        <h2 class="introduction__title introdcution__title__animate">It was written</h2>
-                                        <div class="introdcution__paragraph introdcution__paragraph__animate">
-                                            <p>
-                                                Nas is certainly the n°1 among hip pop<br>
-                                                artists for Dai. However he also listens to<br> 
-                                                pop music (The Lumineers, Fleetwood<br>
-                                                Mac) or some good old Rock 'n' roll.
-                                            </p>                                            
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 block">
-                                        <div class="introduction__picture">                                         
-                                            <img src="{{ asset('bundles/daipublic/images/profile/tiger.png') }}" alt="Tiger"/>
-                                        </div>
-                                        <h2 class="introduction__title introdcution__title__animate">Animals</h2>
-                                        <div class="introdcution__paragraph introdcution__paragraph__animate">
-                                            <p>
-                                                He gets along very well with animals.<br> 
-                                                He cares for red pandas, koalas,<br> 
-                                                hedgehogs and his cat Bimi even if he eats<br> 
-                                                all his plants!
-                                            </p>                                            
-                                        </div>
-                                    </div>
-                                </div>
+    <section class="container-fluid site-content">
+        <div data-page data-page-portfolio class="animated fadeIn">
+            <div
+                id="isotope"
+                class="isotope"
+                data-feed
+                data-url="{{ path ('dai_public_index') }}"
+            >
+                {% for work in works %}
+                    {% if work.published %}
+                        <article
+                            data-item
+                            data-title="{{ work.title }}"
+                            data-category="{{ work.category ? work.category.name }}"
+                            data-reference="{{ work.description }}"
+                            class="isotope__item isotope__item col-lg-4 col-md-4 col-sm-6">
+                            <div class="isotope__item__available {{ work.available ? 'available' : 'unavailable' }} ">
+                                {{ work.available ? 'disponible' : 'non disponible' }}
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="separator"></div>
-                                    <div class="introdcution__paragraph lol">                                        
-                                        <p>
-                                            Special thanks to his friend and room-mate<br>
-                                            <a href="http://benjamin-devaublanc.com">Benjamin Devaublanc</a> who did the web development in<br>
-                                            exchange of washing the dishes during 2 long weeks.
-                                        </p>
-                                    </div>
-                                </div>
+                            <div class="isotope__item__size">
+                                {{ work.width }}/{{ work.height }}cm
                             </div>
-                        </div>
-                    </section>
-                </div>
-                <div data-page data-page-contact class="animated fadeIn">
-                    <section class="introduction">
-                        <h1 class="introduction__title">Say hey to Dai !</h1>
-                        <div class="separator"></div>
-                        <div class="introduction__description">About</div>
-                        <div class="introdcution__paragraph">
-                            <p>
-                                For any proposal, collaboration,<br>
-                                or information, please don't hesitate<br>
-                                to contact Dai Gondo. He is a nice guy.
-                            </p>
-                            <p>
-                                <a href="#" class="introduction__link">daigondo@gmail.com</a>
-                            </p>
-                        </div>
-                    </section>
-                </div>
-            </section>
+                            <img data-carousel-item src="{{ work.image ? asset(work.image.uploadDir ~ '/' ~ work.image.id ~ '.' ~ work.image.url) }}" alt="{{ work.image ? work.image.alt }}"/>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+
+            <ul class="pagination">
+                {% for p in range(1, nbPages) %}
+                    <li{% if p == page %} class="active"{% endif %}>
+                        <a href="{{ path('dai_public_index', {'page': p}) }}">{{ p }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
         </div>
 
-        <footer class="footer">
-            &copy; All right Reserved 2015. Copyright Dai Gondo
-        </footer>
+    </section>
 
 {% endblock %}

@@ -74,6 +74,25 @@ class Work
      */
     private $description;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="width", type="string", length=255)
+     * @Assert\Length(max=50)
+     * @Assert\NotBlank()
+     */
+    private $width;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="height", type="string", length=255)
+     * @Assert\Length(max=50)
+     * @Assert\NotBlank()
+     */
+    private $height;
+
     /**
      * @var integer
      *
@@ -87,6 +106,11 @@ class Work
      * @ORM\Column(name="published", type="boolean")
      */
     private $published = true;
+
+    /**
+     * @ORM\Column(name="available", type="boolean")
+     */
+    private $available = true;
 
     public function __construct()
     {
@@ -173,6 +197,53 @@ class Work
         return $this->description;
     }
 
+
+    /**
+     * Set width
+     *
+     * @param string $width
+     * @return Work
+     */
+    public function setWidth($width)
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return string
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set height
+     *
+     * @param string $height
+     * @return Work
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * Get width
+     *
+     * @return string
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
     /**
      * Set published
      *
@@ -194,6 +265,29 @@ class Work
     public function getPublished()
     {
         return $this->published;
+    }
+
+    /**
+     * Set available
+     *
+     * @param boolean available
+     * @return Work
+     */
+    public function setAvailable($available)
+    {
+        $this->available = $available;
+
+        return $this;
+    }
+
+    /**
+     * Get available
+     *
+     * @return boolean
+     */
+    public function getAvailable()
+    {
+        return $this->available;
     }
 
     /**

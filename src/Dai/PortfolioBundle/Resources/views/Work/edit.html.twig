@@ -5,7 +5,7 @@
     <div class="container">
         <div class="col-md-6 col-md-offset-2">
             <div class="page-header">
-                <h2>Edit work</h2>
+                <h2>Modifier la peinture</h2>
             </div>
 
             {{ form_start(form, {'attr': {'class': 'form-horizontal', 'novalidate': 'novalidate'}}) }}
@@ -13,7 +13,7 @@
                 {{ form_errors(form) }}
 
                 <div class="form-group">
-                    {{ form_label(form.title, "Title", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.title, "Titre", {'label_attr': {'class': 'control-label'}}) }}
                     <div class="text-danger">{{ form_errors(form.title) }}</div>
                     {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                 </div>
@@ -24,6 +24,20 @@
                     {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
+                <div class="flex">
+                    <div class="form-group">
+                        {{ form_label(form.width, "Largeur (cm)", {'label_attr': {'class': 'control-label'}}) }}
+                        <div class="text-danger">{{ form_errors(form.width) }}</div>
+                        {{ form_widget(form.width, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.height, "Hauteur (cm)", {'label_attr': {'class': 'control-label'}}) }}
+                        <div class="text-danger">{{ form_errors(form.height) }}</div>
+                        {{ form_widget(form.height, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
                 <div class="form-group">
                     {{ form_label(form.position, "Position", {'label_attr': {'class': 'control-label'}}) }}
                     <div class="text-danger">{{ form_errors(form.position) }}</div>
@@ -31,28 +45,35 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form_label(form.category, "Category", {'label_attr': {'class': 'control-label'}}) }}
+                    {{ form_label(form.category, "Catégorie", {'label_attr': {'class': 'control-label'}}) }}
                     <div class="text-danger">{{ form_errors(form.category) }}</div>
                     {{ form_widget(form.category, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
-                <div class="form-group">                    
+                <div class="form-group">
                     <div class="text-danger">{{ form_errors(form.image) }}</div>
                     {{ form_widget(form.image) }}
                 </div>
-                
+
 
                 <div class="form-group">
                     <div class="text-danger">{{ form_errors(form.published) }}</div>
                     <label>
-                        {{ form_widget(form.published) }} {{ form_label(form.published, "Published") }}
+                        {{ form_widget(form.published) }} {{ form_label(form.published, "Publié") }}
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <div class="text-danger">{{ form_errors(form.available) }}</div>
+                    <label>
+                        {{ form_widget(form.available) }} {{ form_label(form.available, "Disponible") }}
                     </label>
                 </div>
 
                 {{ form_rest(form) }}
 
                 <div class="form-group overflow">
-                    <input type="submit" class="btn btn-primary pull-right" value="Save"/>
+                    <input type="submit" class="btn btn-primary pull-right" value="Sauvegarder"/>
                 </div>
 
 
@@ -62,4 +83,3 @@
 
 
 {% endblock %}
-

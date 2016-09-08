@@ -3,3 +3,11 @@ dai_public_index:
     defaults:  { _controller: DaiPublicBundle:Public:index, page: 1 }
     requirements:
         page: \d*
+
+dai_public_contact:
+    path:      /contact
+    defaults:  { _controller: DaiPublicBundle:Public:contact }
+
+dai_public_bio:
+    path:      /biographie
+    defaults:  { _controller: DaiPublicBundle:Public:bio }
